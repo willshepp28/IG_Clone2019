@@ -1,1 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+
+.hw24 {
+    height: 24px;
+    width: 24px;
+}
+
+.ig_sprite1 {
+    background: url("https://www.instagram.com/static/bundles/base/sprite_core.png/96319a506a03.png");
+}
+
+#ig_camera {
+    background-position: -401px -388px;
+    height: 30px;
+    width: 30px;
+}
+
+#ig_logo {
+    background-position: -98px -203px;
+    height: 35px;
+    width: 176px;
+}
+
+#explore {
+    background-position: -458px -250px;
+}
+
+#activity_feed {
+    background-position: -458px -328px;
+}
+
+#profile {
+    background-position: -157px -357px;
+}
+
+.navIcon {
+    display: inline-block;
+}
+
+.flex_row {
+    flex-direction: row;
+}
