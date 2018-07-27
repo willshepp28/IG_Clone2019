@@ -6,6 +6,6 @@ nav {
     background-color: #fff !important;
     padding: 26px 40px;
     border-bottom: 1px solid rgba(0,0,0,.0975);
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
 }

@@ -1,19 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand ig_sprite1" id="ig_logo"></a>
+  <a routerLink="/home" class="navbar-brand ig_sprite1" id="ig_logo"></a>
+
+
   <!-- <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form> -->
-<ul class="navbar-nav flex_row ">
-  <li class="nav_item nav-link ig_sprite1 hw24" id="explore"></li>
-  <li class="nav_item nav-link ig_sprite1 hw24" id="activity_feed"></li>
-  <li class="nav_item nav-link ig_sprite1 hw24" id="profile"></li>
-</ul>
-  <!-- <p class="nav_item ig_sprite1 hw24" id="explore"></p>
-  <p class="nav_item ig_sprite1 hw24" id="activity_feed"></p>
-  <p class="nav_item ig_sprite1 hw24" id="profile"></p> -->
 
+<ul class="navbar-nav flex_row ">
+  <a routerLink="/explore"><li class="nav_item nav-link ig_sprite1 hw24" id="explore"></li></a>
+  <li class="nav_item nav-link ig_sprite1 hw24" id="activity_feed"></li>
+  <a routerLink="/profile"><li class="nav_item nav-link ig_sprite1 hw24" id="profile"></li></a>
+  
+  
+  
+</ul>
 </nav>
 
 
