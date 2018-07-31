@@ -51,7 +51,7 @@ application.use(cors({
 | Api
 |--------------------------------------------------------------------------
 */
-
+application.use("/api/v1/user", userApi);
 
 
 
