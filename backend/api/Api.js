@@ -5,8 +5,7 @@
 */
 
 const router = require("express").Router(),
-    jwt = require("jwt-simple"),
-    expressJwt = require("express-jwt"),
+    jwt = require("jsonwebtoken"),
     crypto = require("crypto"),
     knex = require("../db/knex.js");
 
@@ -47,7 +46,18 @@ router.post("/login", ( request, response) => {
         let user = knex.select()
             .from("users")
             .where({ username: request.body.username , password: decrypt })
-            .then( user => { response.status(200).send(user)})
+            .then( user => { 
+
+       
+               
+                if(user === 0) { 
+                    response.status(401).send("No user")
+                } else {
+                    let token = jwt.sign({ user }, "ultrasupersecret")
+                    response.status(200).send({ token });
+                }
+                
+            })
             .catch( error => { 
                 console.log(error);
                 response.status(401).send("Invalid password")});
@@ -82,7 +92,9 @@ router.post("/signup", ( request, response) => {
             password: request.body.password
         })
         .then(user => {
-            response.status(200).json(user);
+           
+            let token = jwt.sign({ user }, "ultrasupersecret")
+            response.status(200).send({ token });
         })
         .catch(error => {
             console.log(error);

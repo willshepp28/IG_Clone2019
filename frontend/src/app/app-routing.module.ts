@@ -7,13 +7,15 @@ import { SignupComponent } from "./signup/signup.component";
 import { ExploreComponent } from "./explore/explore.component";
 import { ProfileComponent } from "./profile/profile.component";
 
+import { AuthGuard } from "./auth.guard";
+
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "home", component: HomeComponent},
     { path: "signup", component: SignupComponent},
     { path: "profile", component: ProfileComponent },
     { path: "login", component: LoginComponent },
-    { path: "explore", component: ExploreComponent }
+    { path: "explore", component: ExploreComponent}
 ];
 
 @NgModule({

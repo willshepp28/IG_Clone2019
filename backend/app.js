@@ -9,7 +9,7 @@
     cors = require("cors"),
     path = require("path"),
     morgan = require("morgan"),
-    userApi = require("./api/userApi"),
+    Api = require("./api/Api"),
     port = process.env.PORT || 8000;
 
 application = express();
@@ -37,11 +37,12 @@ application.use(bodyParser.json());
 
 // Express will allow requests from port 8080
 // 8080 needs access to our json data
-application.use(cors({
-    origin: 'http://localhost:8080',
-    optionsSuccessStatus: 200
-  }));
+// application.use(cors({
+//     origin: 'http://localhost:4200',
+//     optionsSuccessStatus: 200
+//   }));
 
+application.use(cors());
 
 
 
@@ -51,7 +52,7 @@ application.use(cors({
 | Api
 |--------------------------------------------------------------------------
 */
-application.use("/api/v1/user", userApi);
+application.use("/api/v1", Api);
 
 
 
