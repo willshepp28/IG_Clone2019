@@ -8,14 +8,17 @@
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
   </form> -->
 
-<ul class="navbar-nav flex_row ">
+<ul *ngIf="isAuthenticated()" class="navbar-nav flex_row ">
   <a routerLink="/explore"><li class="nav_item nav-link ig_sprite1 hw24" id="explore"></li></a>
   <li class="nav_item nav-link ig_sprite1 hw24" id="activity_feed"></li>
-  <a routerLink="/profile"><li class="nav_item nav-link ig_sprite1 hw24" id="profile"></li></a>
-  
-  
-  
+  <a routerLink="/profile"><li class="nav_item nav-link ig_sprite1 hw24" id="profile"></li></a>  
 </ul>
+
+<ul *ngIf="!isAuthenticated()" class="navbar-nav flex-row">
+  <a routerLink="/login"><li class="nav_text nav-link">Login</li></a>
+  <a routerLink="/signup"><li class="nav_text nav-link">Signup</li></a>
+</ul>
+
 </nav>
 
 

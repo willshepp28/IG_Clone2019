@@ -22,6 +22,17 @@ export class AuthService {
     return this.http.post<any>(this._loginUrl, user)
   }
 
+  loggedIn() {
+
+    // returns true or false
+    // if token is in local storage it returns true. If not it returns false
+    return !!localStorage.getItem('token')
+  }
+
+  getToken() {
+    return localStorage.getItem("token");
+  }
+
 }
 
 
