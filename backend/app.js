@@ -27,12 +27,22 @@ application = express();
 application.use(morgan('dev'));
 // application.use(morgan('combined'))
 
-
+// parse application/json
+application.use(bodyParser.json());
 // parse application/x-www-form-urlencoded
 application.use(bodyParser.urlencoded({ extended: false }));
 
-// parse application/json
-application.use(bodyParser.json());
+// application.use(cors());
+application.use((request, response, next) => {
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    response.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    response.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+ 
+    next();
+});
+
+
 
 
 // Express will allow requests from port 8080
@@ -42,7 +52,7 @@ application.use(bodyParser.json());
 //     optionsSuccessStatus: 200
 //   }));
 
-application.use(cors());
+
 
 
 

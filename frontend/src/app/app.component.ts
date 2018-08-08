@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +11,28 @@ export class AppComponent {
   title = 'app';
 
   constructor(
+    private router: Router,
     private _authService: AuthService
   ){}
 
+ 
   isAuthenticated(): boolean{
-    console.log("Started")
+    
     if(this._authService.loggedIn()) {
-      console.log("true")
+      // console.log(localStorage.getItem('token'))
       return true;
     } else {
-      console.log("false")
       return false;
     }
+  }
+
+
+  clear(){
+    localStorage.clear();
+  }
+
+  showToken(){
+    return localStorage.getItem('token');
   }
 
 }

@@ -34,7 +34,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard, {
+  providers: [AuthService, AuthGuard, 
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
     multi: true

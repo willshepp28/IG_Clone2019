@@ -24,27 +24,13 @@ export class LoginComponent implements OnInit {
     this._auth.loginUser(this.loginUserData)
     .subscribe(
         response => {
-          console.log(response)
           localStorage.setItem("token", response.token);
+          // console.log(response);
           this._router.navigate(["/home"])
         },
         error => console.log( error )
       )
   }
 
-  // loginUser() {
-  //   console.log(this.loginUserData)
-  // }
-
-  // loginUser(event){
-  //   event.preventDefault();
-  //   const target = event.target;
-
-  //   const username = target.querySelector("#username").value;
-  //   const password = target.querySelector("#password").value;
-
-  //   this.Auth.getUserDetails(username, password);
-  //   console.log(username, password);
-  // }
 
 }

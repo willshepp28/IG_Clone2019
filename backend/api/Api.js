@@ -6,6 +6,7 @@
 
 const router = require("express").Router(),
     jwt = require("jsonwebtoken"),
+    { JWT_SECRET_KEY } = require('../secret/config'),
     crypto = require("crypto"),
     knex = require("../db/knex.js");
 
@@ -19,7 +20,37 @@ let encrypt = (password => {
 // let decrypt = crypto.pbkdf2Sync(a,'salt', 10, 512, 'sha512').toString('base64');
 
 
+function verifyToken( request, response, next) {
 
+    if( !request.headers.authorization) {
+        console.log("Because you have no request.headers.auth")
+        return response.status(401).send('Unauthorized request');
+
+    }
+
+    let token = request.headers.authorization.split(' ')[1];
+   
+
+    if ( token === "null") {
+        console.log("Because req.headers/auth is null")
+        return response.status(401).send("Unauthorized request");
+    }
+
+    let payload = jwt.verify( token, JWT_SECRET_KEY);
+
+    if(!payload) {
+        console.log("Because you have no payload")
+        return response.status(401).send("Unauthorized request");
+    }
+
+    // console.log("____________");
+    // console.log(payload.user[0].id);
+    // console.log("____________");
+
+    request.userId = payload.user[0].id;
+    // request.userId = payload;
+    next();
+}
 
 
 router.get("/", ( request, response ) => {
@@ -53,7 +84,7 @@ router.post("/login", ( request, response) => {
                 if(user === 0) { 
                     response.status(401).send("No user")
                 } else {
-                    let token = jwt.sign({ user }, "ultrasupersecret")
+                    let token = jwt.sign({ user }, JWT_SECRET_KEY )
                     response.status(200).send({ token });
                 }
                 
@@ -91,15 +122,33 @@ router.post("/signup", ( request, response) => {
             email: request.body.email,
             password: request.body.password
         })
+        .returning('id')
         .then(user => {
+
+            console.log(user);
            
-            let token = jwt.sign({ user }, "ultrasupersecret")
+            let token = jwt.sign({ user }, JWT_SECRET_KEY)
+            let payload = jwt.verify( token, JWT_SECRET_KEY);
+            console.log(payload);
             response.status(200).send({ token });
         })
         .catch(error => {
             console.log(error);
         })
 });
+
+
+
+router.get("/posts", verifyToken, ( request, response) => {
+
+    let posts = [
+        { id: 1, caption: "You da truth", userId: 3},
+        { id: 2, caption: "Noooooooooooooo", userId: 2},
+        { id: 3, caption: "Yessssssss", userId: 4}
+    ];
+
+    return response.json(posts);
+}) 
 
 
 

@@ -12,10 +12,11 @@
   <a routerLink="/explore"><li class="nav_item nav-link ig_sprite1 hw24" id="explore"></li></a>
   <li class="nav_item nav-link ig_sprite1 hw24" id="activity_feed"></li>
   <a routerLink="/profile"><li class="nav_item nav-link ig_sprite1 hw24" id="profile"></li></a>  
+  <!-- <button (click)="clear()" class="btn btn-primary">Clear</button> -->
 </ul>
 
 <ul *ngIf="!isAuthenticated()" class="navbar-nav flex-row">
-  <a routerLink="/login"><li class="nav_text nav-link">Login</li></a>
+  <a routerLink="/login" ><li class="nav_text nav-link">Login</li></a>
   <a routerLink="/signup"><li class="nav_text nav-link">Signup</li></a>
 </ul>
 
