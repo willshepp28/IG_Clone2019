@@ -49,7 +49,7 @@ function verifyToken( request, response, next) {
 
     request.userId = payload.user[0].id;
     // request.userId = payload;
-    next();
+    next(); 
 }
 
 
@@ -141,13 +141,18 @@ router.post("/signup", ( request, response) => {
 
 router.get("/posts", verifyToken, ( request, response) => {
 
-    let posts = [
-        { id: 1, caption: "You da truth", userId: 3},
-        { id: 2, caption: "Noooooooooooooo", userId: 2},
-        { id: 3, caption: "Yessssssss", userId: 4}
-    ];
+ 
+    knex.from("posts")
+        .innerJoin('users', 'posts.user_id', 'users.id')
+        .then(post => {
+            console.log(post)
+            return response.json(post);
+        })
+        .catch( error => {
+            console.log( error );
+            return response.status(401).send("no posts")
+        })
 
-    return response.json(posts);
 }) 
 
 

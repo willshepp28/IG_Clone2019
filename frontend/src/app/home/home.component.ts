@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   this.authService.getPosts()
     .subscribe(
-      response => this.posts = response,
+      response => { console.log(response), this.posts = response},
       error => { 
         if (error instanceof HttpErrorResponse){
 

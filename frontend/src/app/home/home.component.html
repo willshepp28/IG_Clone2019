@@ -1,1 +1,46 @@
-<p>Home works</p>
+
+
+<div class="card mb-3" *ngFor="let post of posts">
+
+    <!-- Card Header -->
+      <div class="card-header">
+          <div class="container">
+            <div class="row">
+              <a href=""><img src="{{ post.profilePic }}" class="rounded-circle smallPic" alt=""></a>
+              <a href=""><strong>{{ post.username }}</strong></a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Card Image -->
+      <img class="card-img-top" src="{{post.photo}}" alt="Card image cap">
+  
+      <!-- Card body -->
+      <div class="card-body">
+        <div class="card-body padding0">
+          <span *ngIf="!likes" class="ig_sprites hw24" id="heart" (click)="addLike()"></span>
+          <span *ngIf="likes > 0" class="ig_sprites hw24" id="heart2" (click)="removeLike()"></span>
+  
+          <span class="ig_sprites hw24" id="comment"></span>
+          <span *ngIf="!postSaved" class="ig_sprites hw24" id="save" (click)="save()"></span>
+          <span *ngIf="postSaved === true" class="ig_sprites hw24" id="saved" (click)="unSave()"></span>
+    
+        </div>
+        <strong *ngIf="!likes">No likes yet!</strong>
+        <strong *ngIf="likes === 1">{{ likes }} like</strong>
+        <strong *ngIf="likes > 1">{{ likes }} likes</strong>
+  
+        <p class="card-text"><strong>{{ post.username }} </strong> {{ post.caption }}</p>
+  
+        <p class="card-text text-muted">Load more comments</p>
+  
+        <p *ngFor="let comment of comments "class="card-text"><strong>{{ comment.username }} </strong> {{ comment.comment}}</p>
+  
+        <hr>
+        <form action="">
+          <input type="text" name="comment" placeholder="Add a comment...">
+          <button class="btn btn-primary">Submit</button>
+        </form>
+        <p class="card-text"><small class="text-muted">1 day ago</small></p>
+      </div>
+    </div>

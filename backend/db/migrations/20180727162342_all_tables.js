@@ -11,8 +11,15 @@ exports.up = function(knex, Promise) {
         table.boolean("profile_privacy").defaultTo(true);
         table.timestamp('date_joined').defaultTo(knex.fn.now());
     })
+    .createTable("posts", (table) => {
+        table.increments();
+        table.string("photo").notNullable().defaultTo("https://jlfarchitects.com/wp-content/uploads/2015/03/img-placeholder-300x300.jpg");
+        table.text("caption").notNullable();
+        table.integer("user_id").unsigned().references("id").inTable("users").onDelete("cascade");
+        table.timestamp("date_created").defaultTo(knex.fn.now());
+    })
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable("users");
+    return knex.schema.dropTable("posts").dropTable("users");
 };
