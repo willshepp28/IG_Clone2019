@@ -18,6 +18,12 @@ exports.up = function(knex, Promise) {
         table.integer("user_id").unsigned().references("id").inTable("users").onDelete("cascade");
         table.timestamp("date_created").defaultTo(knex.fn.now());
     })
+    .createTable("likes", ( table) => {
+        table.increments();
+        table.integer("postId").unsigned().references("id").inTable("posts");
+        table.integer("userId").unsigned().references("id").inTable("users");
+        table.timestamp("data_liked").defaultTo(knex.fn.now());
+    })
 };
 
 exports.down = function(knex, Promise) {

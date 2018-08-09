@@ -139,14 +139,46 @@ router.post("/signup", ( request, response) => {
 
 
 
-router.get("/posts", verifyToken, ( request, response) => {
+router.get("/posts", verifyToken, async( request, response) => {
 
  
-    knex.from("posts")
+
+    await knex.select("posts.id", "users.id AS userId", "username", "photo", "caption", "profilePic" )
+        .from("posts")
         .innerJoin('users', 'posts.user_id', 'users.id')
         .then(post => {
-            console.log(post)
+
+        
+        
+        // We use this to add the totalLikes property to each post
+         post.forEach((element, index, array ) => {
+             element.totalLikes = 0;
+            //   console.log(element);
+         }) 
+         
+
+   var alllikes = knex.select()
+         .from("likes")
+         .then(likes => {
+            for(i = 0; i < likes.length; i++) {
+ 
+
+                // for(x =0; i < post.length;)
+                for(x = 0; x < post.length; x++) {
+            
+                    if(likes[i].postId === post[x].id) {
+                        post[x].totalLikes += 1;
+                        console.log(post[x])
+                    }
+                }
+            }
+
             return response.json(post);
+
+         })
+
+       
+            
         })
         .catch( error => {
             console.log( error );
@@ -155,6 +187,19 @@ router.get("/posts", verifyToken, ( request, response) => {
 
 }) 
 
+
+router.get("/likes", (request, response) => {
+
+    let likes = knex.select()
+        .from("likes")
+        .then( like => {
+            return response.json(like);
+        })
+        .catch( error => {
+            console.log(error);
+            return response.status(401).send("Didnt recieve likes");
+        })
+});
 
 
 
