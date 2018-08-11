@@ -10,35 +10,35 @@ const router = require("express").Router(),
     crypto = require("crypto"),
     knex = require("../db/knex.js");
 
-    
+
 
 let encrypt = (password => {
-  return crypto.pbkdf2Sync(password, "salt", 10, 512, "sha512")
-  .toString("base64");
+    return crypto.pbkdf2Sync(password, "salt", 10, 512, "sha512")
+        .toString("base64");
 });
 
 // let decrypt = crypto.pbkdf2Sync(a,'salt', 10, 512, 'sha512').toString('base64');
 
 
-function verifyToken( request, response, next) {
+function verifyToken(request, response, next) {
 
-    if( !request.headers.authorization) {
+    if (!request.headers.authorization) {
         console.log("Because you have no request.headers.auth")
         return response.status(401).send('Unauthorized request');
 
     }
 
     let token = request.headers.authorization.split(' ')[1];
-   
 
-    if ( token === "null") {
+
+    if (token === "null") {
         console.log("Because req.headers/auth is null")
         return response.status(401).send("Unauthorized request");
     }
 
-    let payload = jwt.verify( token, JWT_SECRET_KEY);
+    let payload = jwt.verify(token, JWT_SECRET_KEY);
 
-    if(!payload) {
+    if (!payload) {
         console.log("Because you have no payload")
         return response.status(401).send("Unauthorized request");
     }
@@ -48,16 +48,17 @@ function verifyToken( request, response, next) {
     // console.log("____________");
 
     request.userId = payload.user[0].id;
+    // console.log(request.userId);
     // request.userId = payload;
-    next(); 
+    next();
 }
 
 
-router.get("/", ( request, response ) => {
+router.get("/", (request, response) => {
 
     var decrypt = crypto.pbkdf2Sync("123", 'salt', 10, 512, 'sha512').toString('base64');
 
-    
+
 });
 
 
@@ -68,31 +69,32 @@ router.get("/", ( request, response ) => {
 */
 
 
-router.post("/login", ( request, response) => {
+router.post("/login", (request, response) => {
 
     var decrypt = crypto.pbkdf2Sync(request.body.password, 'salt', 10, 512, 'sha512').toString('base64');
 
-     if( request.body.username && request.body.password ) {
+    if (request.body.username && request.body.password) {
 
         let user = knex.select()
             .from("users")
-            .where({ username: request.body.username , password: decrypt })
-            .then( user => { 
+            .where({ username: request.body.username, password: decrypt })
+            .then(user => {
 
-       
-               
-                if(user === 0) { 
+
+
+                if (user === 0) {
                     response.status(401).send("No user")
                 } else {
-                    let token = jwt.sign({ user }, JWT_SECRET_KEY )
+                    let token = jwt.sign({ user }, JWT_SECRET_KEY)
                     response.status(200).send({ token });
                 }
-                
+
             })
-            .catch( error => { 
+            .catch(error => {
                 console.log(error);
-                response.status(401).send("Invalid password")});
-     }
+                response.status(401).send("Invalid password")
+            });
+    }
 
 
 });
@@ -112,9 +114,9 @@ router.post("/login", ( request, response) => {
 |--------------------------------------------------------------------------
 */
 
-router.post("/signup", ( request, response) => {
+router.post("/signup", (request, response) => {
 
-  
+
 
     var userData = knex("users")
         .insert({
@@ -126,9 +128,9 @@ router.post("/signup", ( request, response) => {
         .then(user => {
 
             console.log(user);
-           
+
             let token = jwt.sign({ user }, JWT_SECRET_KEY)
-            let payload = jwt.verify( token, JWT_SECRET_KEY);
+            let payload = jwt.verify(token, JWT_SECRET_KEY);
             console.log(payload);
             response.status(200).send({ token });
         })
@@ -139,67 +141,174 @@ router.post("/signup", ( request, response) => {
 
 
 
-router.get("/posts", verifyToken, async( request, response) => {
+router.get("/posts", verifyToken, async (request, response) => {
 
- 
+    console.log("************************")
+    console.log(request.userId);
+    console.log("************************")
 
-    await knex.select("posts.id", "users.id AS userId", "username", "photo", "caption", "profilePic" )
+    await knex.select("posts.id", "users.id AS userId", "username", "photo", "caption", "profilePic")
         .from("posts")
         .innerJoin('users', 'posts.user_id', 'users.id')
         .then(post => {
 
-        
-        
-        // We use this to add the totalLikes property to each post
-         post.forEach((element, index, array ) => {
-             element.totalLikes = 0;
-            //   console.log(element);
-         }) 
-         
 
-   var alllikes = knex.select()
-         .from("likes")
-         .then(likes => {
-            for(i = 0; i < likes.length; i++) {
- 
 
-                // for(x =0; i < post.length;)
-                for(x = 0; x < post.length; x++) {
-            
-                    if(likes[i].postId === post[x].id) {
-                        post[x].totalLikes += 1;
-                        console.log(post[x])
+            // We use this to add the totalLikes property to each post
+            post.forEach((element, index, array) => {
+                element.totalLikes = 0;
+                //   console.log(element);
+            })
+
+
+            var alllikes = knex.select()
+                .from("likes")
+                .then(likes => {
+                    for (i = 0; i < likes.length; i++) {
+
+
+                        // for(x =0; i < post.length;)
+                        for (x = 0; x < post.length; x++) {
+
+                            if (likes[i].postId === post[x].id) {
+                                post[x].totalLikes += 1;
+                                // console.log(post[x])
+                            }
+                        }
                     }
-                }
-            }
 
-            return response.json(post);
+                    return response.json(post);
 
-         })
+                })
 
-       
-            
+
+
         })
-        .catch( error => {
-            console.log( error );
+        .catch(error => {
+            console.log(error);
             return response.status(401).send("no posts")
         })
 
-}) 
+})
 
 
 router.get("/likes", (request, response) => {
 
     let likes = knex.select()
         .from("likes")
-        .then( like => {
+        .then(like => {
             return response.json(like);
         })
-        .catch( error => {
+        .catch(error => {
             console.log(error);
             return response.status(401).send("Didnt recieve likes");
         })
 });
+
+
+router.post("/likes", verifyToken, (request, response) => {
+    console.log("///////////////")
+    console.log(request.userId);
+
+
+    console.log("///////////////")
+
+
+    var postLike = knex("likes")
+        .where({
+            postId: request.body.id,
+            userId: request.userId
+        })
+        .then(likes => {
+
+           console.log(likes);
+
+           console.log(`You have ${likes.length} likes`)
+
+
+            // if their are posts returned from the database
+            // create posts
+            if (likes.length === 0) {
+                console.log("You dont have likes")
+
+                // adds like
+                var addLike = knex("likes")
+                    .insert({
+                        postId: request.body.id,
+                        userId: request.userId
+                    })
+                    .then(response => response.status(200).send("Added Like"))
+                    .catch(error => console.log(error));
+            }
+
+
+            // if their are posts returned from the database
+            // delete posts
+            if (likes.length > 0) {
+                console.log("You have likes")
+            
+            var deleteLike = knex("likes")
+                .where({
+                    postId: request.body.id,
+                    userId: request.userId
+                })
+                .del()
+                .then(() => response.status(200).send("Deleted post"))
+                .catch(error => {
+                    console.log(error);
+                    response.sendStatus(401);
+                })
+
+
+            }
+        
+        })
+    .catch(error => console.log(error))
+
+    // var likes = knex.select()
+    //     .from("likes")
+    //     .where({
+    //         postId: request.body.id
+    //     })
+    //     .then(likes => {
+
+    //         var match = false;
+
+    //         // check to see if user already liked post
+    //         // if so delete
+    //         // if not insert
+    //         likes.forEach((like) => {
+    //             // compare like.usrId with request.userI
+    //             if(like.userId === request.userId) {
+    //                 var deleteLike = knex("likes")
+    //                     .where({
+    //                         postId: request.body.id,
+    //                         userId: request.userId
+    //                     })
+    //                     .then( response => console.log(response))
+    //                     .catch( error => console.log(error));
+    //             }
+    //         })
+    //     })
+
+
+    // let likeData = knex("likes")
+    //     .insert({
+    //         postId: request.body.id,
+    //         userId: request.userId
+    //     })
+    //     .then( response => console.log(response))
+    //     .catch( error =>  console.log(error));
+
+
+    // var likeData = knex("likes")
+    //     .insert({
+    //         postId: request.body.postId,
+    //         userId: request.userId
+    //     })
+    //     .then( response.json())
+    //     .catch(error => { console.log(error)})
+})
 
 
 

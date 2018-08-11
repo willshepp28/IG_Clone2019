@@ -27,5 +27,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable("posts").dropTable("users");
+    return knex.schema.dropTable("likes").dropTable("posts").dropTable("users");
 };
