@@ -154,6 +154,29 @@ router.get("/posts", verifyToken, async (request, response) => {
 
 
 
+            // get all likes, match it to post, the push in that posts comments array
+            var allComments = knex.select()
+                .from("comments")
+                .then(comment => {
+                    console.log(comment);
+
+                    for(let i = 0; i < post.length; i++) {
+
+                        for(let x = 0; x < comment.length; x++){
+
+                            // console.log("In the for loop inside comments")
+                            // console.log(post[i])
+                            
+                            if(comment[x].postId === post[i].id) {
+                                post[i].comments.push(comment[x]);
+                            }
+                        }
+                        
+                    }
+                })
+
+
+
             // how we get likes
             var alllikes = knex.select()
                 .from("likes")

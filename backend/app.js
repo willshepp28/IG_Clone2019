@@ -10,7 +10,7 @@
     path = require("path"),
     morgan = require("morgan"),
     Api = require("./api/Api"),
-    port = process.env.PORT || 8000;
+    port = process.env.PORT || 3000;
 
 application = express();
 

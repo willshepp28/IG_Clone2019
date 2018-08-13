@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   postSaved: boolean = false;
 
 
-  private _likeUrl = "http://localhost:8000/api/v1/likes";
+  private _likeUrl = "http://localhost:3000/api/v1/likes";
 
 
 

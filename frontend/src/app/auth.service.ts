@@ -11,9 +11,9 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private _signupUrl = "http://localhost:8000/api/v1/signup";
-  private _loginUrl = "http://localhost:8000/api/v1/login";
-  private _postsUrl = "http://localhost:8000/api/v1/posts";
+  private _signupUrl = "http://localhost:3000/api/v1/signup";
+  private _loginUrl = "http://localhost:3000/api/v1/login";
+  private _postsUrl = "http://localhost:3000/api/v1/posts";
 
   constructor(
     private http: HttpClient,
