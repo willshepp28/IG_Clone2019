@@ -17,7 +17,6 @@ let encrypt = (password => {
         .toString("base64");
 });
 
-// let decrypt = crypto.pbkdf2Sync(a,'salt', 10, 512, 'sha512').toString('base64');
 
 
 function verifyToken(request, response, next) {
@@ -43,13 +42,9 @@ function verifyToken(request, response, next) {
         return response.status(401).send("Unauthorized request");
     }
 
-    // console.log("____________");
-    // console.log(payload.user[0].id);
-    // console.log("____________");
 
     request.userId = payload.user[0].id;
-    // console.log(request.userId);
-    // request.userId = payload;
+   
     next();
 }
 
@@ -99,11 +94,6 @@ router.post("/login", (request, response) => {
 
 });
 
-// {
-// 	"username": "diff",
-// 	"email": "diff@gmail.com",
-// 	"password": "477"
-// }
 
 
 
@@ -207,12 +197,7 @@ router.get("/likes", (request, response) => {
 
 
 router.post("/likes", verifyToken, (request, response) => {
-    console.log("///////////////")
-    console.log(request.userId);
-
-
-    console.log("///////////////")
-
+   
 
     var postLike = knex("likes")
         .where({
@@ -221,7 +206,7 @@ router.post("/likes", verifyToken, (request, response) => {
         })
         .then(likes => {
 
-           console.log(likes);
+        //    console.log(likes);
 
            console.log(`You have ${likes.length} likes`)
 
@@ -237,7 +222,7 @@ router.post("/likes", verifyToken, (request, response) => {
                         postId: request.body.id,
                         userId: request.userId
                     })
-                    .then(response => response.status(200).send("Added Like"))
+                    .then(()=> response.status(200).json("added like"))
                     .catch(error => console.log(error));
             }
 
@@ -253,7 +238,7 @@ router.post("/likes", verifyToken, (request, response) => {
                     userId: request.userId
                 })
                 .del()
-                .then(() => response.status(200).send("Deleted post"))
+                .then(() => response.status(200).json("Deleted like"))
                 .catch(error => {
                     console.log(error);
                     response.sendStatus(401);
@@ -265,49 +250,6 @@ router.post("/likes", verifyToken, (request, response) => {
         })
     .catch(error => console.log(error))
 
-    // var likes = knex.select()
-    //     .from("likes")
-    //     .where({
-    //         postId: request.body.id
-    //     })
-    //     .then(likes => {
-
-    //         var match = false;
-
-    //         // check to see if user already liked post
-    //         // if so delete
-    //         // if not insert
-    //         likes.forEach((like) => {
-    //             // compare like.usrId with request.userI
-    //             if(like.userId === request.userId) {
-    //                 var deleteLike = knex("likes")
-    //                     .where({
-    //                         postId: request.body.id,
-    //                         userId: request.userId
-    //                     })
-    //                     .then( response => console.log(response))
-    //                     .catch( error => console.log(error));
-    //             }
-    //         })
-    //     })
-
-
-    // let likeData = knex("likes")
-    //     .insert({
-    //         postId: request.body.id,
-    //         userId: request.userId
-    //     })
-    //     .then( response => console.log(response))
-    //     .catch( error =>  console.log(error));
-
-
-    // var likeData = knex("likes")
-    //     .insert({
-    //         postId: request.body.postId,
-    //         userId: request.userId
-    //     })
-    //     .then( response.json())
-    //     .catch(error => { console.log(error)})
 })
 
 

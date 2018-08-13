@@ -24,8 +24,14 @@ exports.up = function(knex, Promise) {
         table.integer("userId").unsigned().references("id").inTable("users");
         table.timestamp("data_liked").defaultTo(knex.fn.now());
     })
+    .createTable("comments", (table) => {
+        table.increments();
+        table.text("comment").notNullable();
+        table.integer("userId").unsigned().references("id").inTable("users");
+        table.integer("postId").unsigned().references("id").inTable("posts");
+    })
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable("likes").dropTable("posts").dropTable("users");
+    return knex.schema.dropTable("comments").dropTable("likes").dropTable("posts").dropTable("users");
 };

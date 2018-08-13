@@ -36,20 +36,6 @@ intercept(
 
 
 
-// return next.handle(request)
-//   .pipe(map(data => {
-//     localStorage.setItem('item', data.type.toString())
-//     console.log(this._auth.getToken())
-//     console.log(localStorage.getItem('item'))
-//     console.log(data);
-//     return data
-//   }),
-//   catchError( error => {
-//     return throwError("Something went wrong")
-//   })
-// )
-
-
 }
 
 

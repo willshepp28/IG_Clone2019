@@ -14,6 +14,7 @@ import { ExploreComponent } from './explore/explore.component';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { LikeService } from './like.service';
 
 
 
@@ -34,7 +35,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard, 
+  providers: [AuthService, AuthGuard, LikeService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

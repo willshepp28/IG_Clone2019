@@ -1,12 +1,12 @@
 
 
-<div class="card mb-3" *ngFor="let post of posts">
+<div class="card mb-3 mt-4 mx-auto" *ngFor="let post of posts">
 
     <!-- Card Header -->
       <div class="card-header">
           <div class="container">
             <div class="row">
-              <a href=""><img src="{{ post.profilePic }}" class="rounded-circle smallPic" alt=""></a>
+              <a href=""><img src="" class="rounded-circle smallPic" alt=""></a>
               <a href=""><strong>{{ post.username }}</strong></a>
             </div>
           </div>
@@ -18,17 +18,17 @@
       <!-- Card body -->
       <div class="card-body">
         <div class="card-body padding0">
-          <span *ngIf="!likes" class="ig_sprites hw24" id="heart" (click)="addLike()"></span>
-          <span *ngIf="likes > 0" class="ig_sprites hw24" id="heart2" (click)="removeLike()"></span>
+          <button *ngIf="!post.totalLikes" class="ig_sprites hw24 borderNone outlineNone" id="heart" (click)="LikePost(post.id)"></button>
+          <button *ngIf="post.totalLikes > 0" class="ig_sprites hw24 borderNone outlineNone" id="heart2" (click)="LikePost(post.id)"></button>
   
-          <span class="ig_sprites hw24" id="comment"></span>
-          <span *ngIf="!postSaved" class="ig_sprites hw24" id="save" (click)="save()"></span>
-          <span *ngIf="postSaved === true" class="ig_sprites hw24" id="saved" (click)="unSave()"></span>
+          <button class="ig_sprites hw24 borderNone outlineNone" id="comment"></button>
+          <span *ngIf="!postSaved" class="ig_sprites hw24 borderNone outlineNone" id="save" (click)="save()"></span>
+          <span *ngIf="postSaved === true" class="ig_sprites hw24 borderNone outlineNone" id="saved" (click)="unSave()"></span>
     
         </div>
-        <strong *ngIf="!likes">No likes yet!</strong>
-        <strong *ngIf="likes === 1">{{ likes }} like</strong>
-        <strong *ngIf="likes > 1">{{ likes }} likes</strong>
+        <strong *ngIf="post.totalLikes == 0">No likes yet! {{ post.totalLikes}}</strong>
+        <strong *ngIf="post.totalLikes == 1">{{ post.totalLikes }} like</strong>
+        <strong *ngIf="post.totalLikes > 1">{{ post.totalLikes}} likes</strong>
   
         <p class="card-text"><strong>{{ post.username }} </strong> {{ post.caption }}</p>
   

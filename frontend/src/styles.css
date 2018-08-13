@@ -6,6 +6,7 @@ body {
 .red {
     background-color: red;
 }
+
 .white-li li {
     color: white !important;
    
@@ -49,4 +50,66 @@ body {
 
 .flex_row {
     flex-direction: row;
+}
+
+
+/* You can add global styles to this file, and also import other style files */
+body {
+    background: #fafafa;
+}
+.bold {
+    color:#262626;
+}
+
+a {
+    color: #262626 !important;
+    text-decoration: none;
+}
+
+.ig_sprites2 {
+    background: url("https://www.instagram.com/static/bundles/base/sprite_core.png/96319a506a03.png");
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+
+.ig_sprites {
+    background: url("https://www.instagram.com/static/bundles/base/sprite_glyphs.png/2fc7be4c62f6.png");
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+.card {
+    width:  50vw !important;
+}
+
+.hw24 {
+    height:24px;
+    width: 24px;
+}
+
+#heart {
+    background-position: -210px -104px;
+}
+
+#comment {
+    background-position: -98px -138px;
+}
+
+#save {
+    background-position: -131px -184px;
+}
+
+#saved {
+    background-position: -52px -184px;
+}
+
+#heart2 {
+    background-position: -210px -26px;
+}
+
+.padding0 {
+    padding: 0;
+}
+
+.card-body {
+    font-size: 12px;
 }

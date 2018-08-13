@@ -1,4 +1,21 @@
-
+/*
+====================
+Home Styling
+====================
+*/
 .smallPic {
     height: 24px;
+}
+
+.borderNone {
+    border: none;
+}
+
+.outlineNone {
+    outline: none;
+}
+
+
+button.ig_sprites {
+    margin-right: 5px;
 }
