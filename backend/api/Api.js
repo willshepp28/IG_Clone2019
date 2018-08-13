@@ -145,12 +145,16 @@ router.get("/posts", verifyToken, async (request, response) => {
 
 
             // We use this to add the totalLikes property to each post
+            // We also use this to add an array of comments on each
             post.forEach((element, index, array) => {
                 element.totalLikes = 0;
+                element.comments = [];
                 //   console.log(element);
             })
 
 
+
+            // how we get likes
             var alllikes = knex.select()
                 .from("likes")
                 .then(likes => {
