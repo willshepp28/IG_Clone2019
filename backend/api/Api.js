@@ -313,26 +313,25 @@ router.get("/profile/:id", verifyToken, ( request ,response) => {
     console.log( request.params.id);
     console.log( userId)
 
-    
-
-    // var user = knex("users")
-    //     .innerJoin("posts", "users.id", "posts.user_id")
-    //     .then((user) => {
-
-            
-    //         response.status(200).json(user)
-        
-    //     })
-    //     .catch((error) => console.log(error));
 
     let user = knex.select("users.id", "username" , "posts.id AS _postId", "photo", "profilePic")
         .from("users")
         .where('users.id', userId)
         .innerJoin("posts", "users.id", "posts.user_id")
-        // .where({
-        //     id: request.params.id
-        // })
-        .then( user => response.status(200).json(user))
+        .then( user => {
+            
+            var userData = {
+                username: user[0].username,
+                profilePic: user[0].profilePic,
+                posts: []
+            };
+
+            for(let i = 0; i < user.length; i++) {
+                userData.posts.push({ postId: user[i]._postId, photo: user[i].photo})
+            } 
+
+            response.status(200).json(userData)}
+        )
         .catch( error => console.log(error));
 
 })

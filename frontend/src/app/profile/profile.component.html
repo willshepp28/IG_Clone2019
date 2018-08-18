@@ -1,8 +1,47 @@
 
-<div class="container" *ngFor="let user of user">
+<div class="container pt-5 w-75">
   
+  <div class="row w-75 m-auto">
+    <div class="col">
+        <img src="{{user.profilePic}}" style="height:100px" alt="" class="rounded-circle">
+    </div>
+
+    <div class="col">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3 class="helvetica-font font-weight200">{{user.username}}</h3>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <span class="small-font"><strong>90</strong> posts  <strong>95</strong> followers <strong>915</strong> following</span>
+              </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <div class="row mt-50">
+      <div class="col">
+        <p class="text-center">Posts</p>
+      </div>
+    </div>
+<!-- 
   <div class="row">
-    <img src="{{user.profilePic}}" style="height:200px" alt="" class="rounded-circle">
+    <div class="col">
+      <div *ngFor="let post of user['photo']">
+          <img src="post.photo" alt="">
+      </div>
+    </div>
+  </div> -->
+  <div class="row bt-grey">
+    <div class="col pt-5" *ngFor="let post of user.posts">
+        <img src="{{post.photo}}" alt="" style="height: 200px">
+      </div>
   </div>
 
 </div>
