@@ -37,10 +37,12 @@
         <p *ngFor="let say of post['comments'] "class="card-text"><strong> </strong> {{ say.comment}}</p>
   
         <hr>
-        <form action="">
-          <input type="text" name="comment" placeholder="Add a comment...">
-          <button class="btn btn-primary">Submit</button>
+        
+        <form class="form">
+          <input [(ngModel)]="userComment" name="comment" type="text" class="form-control rounded-0"  required>
+          <button (click)="addComment(post.id)"  class="btn btn-primary">Submit</button>
         </form>
+
         <p class="card-text"><small class="text-muted">1 day ago</small></p>
       </div>
     </div>

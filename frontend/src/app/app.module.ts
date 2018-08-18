@@ -15,6 +15,7 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { LikeService } from './like.service';
+import { CommentService } from './comment.service';
 
 
 
@@ -35,7 +36,7 @@ import { LikeService } from './like.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard, LikeService,
+  providers: [AuthService, AuthGuard, LikeService, CommentService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

@@ -1,3 +1,8 @@
-<p>
-  profile works!
-</p>
+
+<div class="container" *ngFor="let user of user">
+  
+  <div class="row">
+    <img src="{{user.profilePic}}" style="height:200px" alt="" class="rounded-circle">
+  </div>
+
+</div>

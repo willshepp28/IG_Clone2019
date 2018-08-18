@@ -4,6 +4,7 @@ import { HttpErrorResponse, HttpHeaders, HttpClient } from '@angular/common/http
 import { Router } from '@angular/router';
 import { LikeService } from '../like.service';
 import { Observable } from 'rxjs';
+import { CommentService } from '../comment.service';
 
 
 @Component({
@@ -15,6 +16,12 @@ export class HomeComponent implements OnInit {
 
   posts = [];
   comments = [];
+  userComment;
+  // comments = {
+  //   comment: "",
+  //   postId: 0
+  // };
+  
 
   postSaved: boolean = false;
 
@@ -26,6 +33,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private likeService: LikeService,
+    private commentService: CommentService,
     private router: Router,
     private http: HttpClient
   ) { }
@@ -74,6 +82,16 @@ export class HomeComponent implements OnInit {
       )
 
   }
+
+// comment = {};
+  addComment(postId){
+
+    this.comments.push({ postId: postId, comment: this.userComment});
+    console.log(this.comments);
+
+  }
+
+
 
 
   save() {
