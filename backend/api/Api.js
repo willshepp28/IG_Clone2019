@@ -364,6 +364,37 @@ router.route("/addPost", verifyToken, (request, response) => {
 
 
 
+router.get("/users", (request, response) => {
+
+    console.log("This is the user route")
+
+
+
+    knex.select("id","username", "profilePic")
+        .from("users")
+        .orderByRaw('RANDOM()')
+        .limit(3)
+        .then(user => {
+            console.log(user);
+            response.status(200).json(user);
+        })
+        .catch(error =>  console.log(error));
+});
+
+router.get("/post", (request, response) => {
+
+    knex.select("id", "photo")
+        .from("posts")
+        .then(post => response.status(200).json(post))
+        .catch(error => console.log(error));
+
+});
+
+
+
+
+
+
 
 
 

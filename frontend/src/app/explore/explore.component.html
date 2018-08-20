@@ -1,3 +1,28 @@
-<p>
-  explore works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col"><p>Discover People</p></div>
+  </div>
+
+
+  <div class="row">
+    <div *ngFor="let user of users" class="card col-md-3" style="margin-left:25px; padding:20px">
+      <img class="card-img-top rounded-circle" src="{{user.profilePic}}" style="height: 100px" alt="Card image cap">
+      <div class="card-body">
+        <p class="card-text">{{user.username}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col"><p>Explore</p></div>
+  </div>
+
+
+  <div class="row bt-grey">
+    <div class="col-md-4 pt-5" *ngFor="let post of posts">
+        <img src="{{post.photo}}" alt="" style="height: 200px">
+      </div>
+  </div>
+  
+</div>

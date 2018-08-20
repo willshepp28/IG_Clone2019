@@ -14,6 +14,8 @@ export class AuthService {
   private _signupUrl = "http://localhost:3000/api/v1/signup";
   private _loginUrl = "http://localhost:3000/api/v1/login";
   private _postsUrl = "http://localhost:3000/api/v1/posts";
+  private _postUrl = "http://localhost:3000/api/v1/post";
+  private _userUrl = "http://localhost:3000/api/v1/users";
 
   constructor(
     private http: HttpClient,
@@ -43,6 +45,15 @@ export class AuthService {
    public getToken(): string {
   
     return localStorage.getItem('token');
+  }
+
+
+  discoverUsers(){
+    return this.http.get<any>(this._userUrl);
+  }
+
+  getPost(){
+    return this.http.get<any>(this._postUrl);
   }
   
  
