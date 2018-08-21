@@ -9,3 +9,10 @@ nav {
     /* position: fixed; */
     width: 100%;
 }
+
+.activity_feed {
+    margin-bottom: 8px;
+    padding: 5px;
+    cursor: pointer;
+    border-bottom: solid 1px #e6e6e6;
+}

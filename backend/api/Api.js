@@ -7,7 +7,7 @@
 const router = require("express").Router(),
     jwt = require("jsonwebtoken"),
     { JWT_SECRET_KEY } = require('../secret/config'),
-    // { verifyToken } = require('../helper')
+    verifyToken = require("../helper"),
     crypto = require("crypto"),
     knex = require("../db/knex.js");
 
@@ -19,35 +19,6 @@ let encrypt = (password => {
 });
 
 
-
-function verifyToken(request, response, next) {
-
-    if (!request.headers.authorization) {
-        console.log("Because you have no request.headers.auth")
-        return response.status(401).send('Unauthorized request');
-
-    }
-
-    let token = request.headers.authorization.split(' ')[1];
-
-
-    if (token === "null") {
-        console.log("Because req.headers/auth is null")
-        return response.status(401).send("Unauthorized request");
-    }
-
-    let payload = jwt.verify(token, JWT_SECRET_KEY);
-
-    if (!payload) {
-        console.log("Because you have no payload")
-        return response.status(401).send("Unauthorized request");
-    }
-
-
-    request.userId = payload.user[0].id;
-   
-    next();
-}
 
 
 router.get("/", (request, response) => {
@@ -385,6 +356,7 @@ router.get("/post", (request, response) => {
 
     knex.select("id", "photo")
         .from("posts")
+        .orderByRaw("RANDOM()")
         .then(post => response.status(200).json(post))
         .catch(error => console.log(error));
 

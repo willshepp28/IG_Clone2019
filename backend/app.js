@@ -10,6 +10,10 @@
     path = require("path"),
     morgan = require("morgan"),
     Api = require("./api/Api"),
+    likesApi = require("./api/likesApi"),
+    postApi = require("./api/postApi"),
+    commentsApi = require("./api/commentsApi"),
+    followerApi = require("./api/followApi"),
     port = process.env.PORT || 3000;
 
 application = express();
@@ -54,6 +58,10 @@ application.use(cors())
 | Api
 |--------------------------------------------------------------------------
 */
+application.use("/api/v1/follower", followerApi);
+application.use("/api/v1/comments", commentsApi);
+application.use("/api/v1/posts", postApi);
+application.use('/api/v1/likes', likesApi);
 application.use("/api/v1", Api);
 
 

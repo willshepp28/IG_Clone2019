@@ -1,21 +1,22 @@
 <div class="container">
   <div class="row">
-    <div class="col"><p>Discover People</p></div>
+    <div class="col"><p class="grey font-weight600 mt-5">Discover People</p></div>
   </div>
 
 
   <div class="row">
     <div *ngFor="let user of users" class="card col-md-3" style="margin-left:25px; padding:20px">
-      <img class="card-img-top rounded-circle" src="{{user.profilePic}}" style="height: 100px" alt="Card image cap">
+      <img class="card-img-top rounded-circle" src="{{user.profilePic}}" style="height: 78px; width: 78px; margin:0 auto" alt="Card image cap">
       <div class="card-body">
-        <p class="card-text">{{user.username}}</p>
+        <p class="card-text text-center pStyle">{{user.username}}</p>
       </div>
+      <button class="btn btn-primary" style="width:50%; margin: 0 auto">Follow</button>
     </div>
   </div>
 
 
-  <div class="row">
-    <div class="col"><p>Explore</p></div>
+  <div class="row mt-5">
+    <div class="col"><p class="grey font-weight600">Explore</p></div>
   </div>
 
 

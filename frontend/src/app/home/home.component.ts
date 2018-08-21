@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LikeService } from '../like.service';
 import { Observable } from 'rxjs';
 import { CommentService } from '../comment.service';
+import { FollowerService } from '../follower.service';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   posts = [];
   comments = [];
+  followers = [];
   userComment;
   // comments = {
   //   comment: "",
@@ -34,11 +36,14 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private likeService: LikeService,
     private commentService: CommentService,
+    private followerService: FollowerService,
     private router: Router,
     private http: HttpClient
   ) { }
 
   ngOnInit() {
+
+  
 
     this.authService.getPosts()
       .subscribe(
@@ -53,7 +58,17 @@ export class HomeComponent implements OnInit {
         }
       )
 
+
+    this.followerService.getFollowers()
+      .subscribe(
+        response => { console.log(response), this.followers = response},
+        error => console.log(error)
+      )
+
+      
+
   }
+
 
 
 

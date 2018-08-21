@@ -13,7 +13,7 @@ exports.up = function(knex, Promise) {
     })
     .createTable("posts", (table) => {
         table.increments();
-        table.string("photo").notNullable().defaultTo("https://jlfarchitects.com/wp-content/uploads/2015/03/img-placeholder-300x300.jpg");
+        table.text("photo").notNullable().defaultTo("https://jlfarchitects.com/wp-content/uploads/2015/03/img-placeholder-300x300.jpg");
         table.text("caption").notNullable();
         table.integer("user_id").unsigned().references("id").inTable("users").onDelete("cascade");
         table.timestamp("date_created").defaultTo(knex.fn.now());
@@ -30,8 +30,19 @@ exports.up = function(knex, Promise) {
         table.integer("userId").unsigned().references("id").inTable("users");
         table.integer("postId").unsigned().references("id").inTable("posts");
     })
+    .createTable("follower", (table) => {
+        table.increments();
+        table.integer("followerId").unsigned().references("id").inTable("users");
+        table.integer("followeeId").unsigned().references("id").inTable("users")
+        table.boolean("accept_request").defaultTo("false");
+    })
+    .createTable("savedPost", (table) => {
+        table.increments();
+        table.integer("userId").unsigned().references("id").inTable("users");
+        table.integer("postId").unsigned().references("id").inTable("posts");
+    })
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable("comments").dropTable("likes").dropTable("posts").dropTable("users");
+    return knex.schema.dropTable("savedPost").dropTable("comments").dropTable("likes").dropTable("posts").dropTable("follower").dropTable("users");
 };
