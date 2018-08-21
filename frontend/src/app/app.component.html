@@ -49,11 +49,11 @@
           <div class="card-header">
             <strong>< Follow Requests</strong>
           </div>
-          <ul class="list-group list-group-flush" *ngFor="let user of users">
+          <ul class="list-group list-group-flush" *ngFor="let follower of followRequests">
             <li class="list-group-item">
               <div class="row">
-                <div class="col"><img src="https://cdn.credihealth.com/system/images/assets/8979/original/icon.jpg?1516271343" class="rounded-circle" alt=""></div>
-                <div class="col"><strong>{{user.name}}</strong></div>
+                <div class="col"><img src="{{follower.profilePic}}" class="rounded-circle" alt="" style="height:35px"></div>
+                <div class="col"><strong>{{follower.username}}</strong></div>
                 <div class="col"><button class="btn btn-primary" type="button">Approve</button></div>
                 <div class="col"><button class="btn btn-light" type="button">Hide</button></div>
               </div>

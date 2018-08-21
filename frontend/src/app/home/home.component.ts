@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { CommentService } from '../comment.service';
 import { FollowerService } from '../follower.service';
 
+import * as jwt_decode from "jwt-decode";
+
 
 @Component({
   selector: 'app-home',
@@ -56,13 +58,6 @@ export class HomeComponent implements OnInit {
             }
           }
         }
-      )
-
-
-    this.followerService.getFollowers()
-      .subscribe(
-        response => { console.log(response), this.followers = response},
-        error => console.log(error)
       )
 
       
@@ -115,6 +110,16 @@ export class HomeComponent implements OnInit {
 
   unSave() {
     this.postSaved = false;
+  }
+
+
+  getDecodedAccessToken(token: string): any {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+        return null;
+    }
   }
 
 
