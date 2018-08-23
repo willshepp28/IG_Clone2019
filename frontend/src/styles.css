@@ -144,3 +144,9 @@ a {
     -webkit-box-shadow: 0 0 5px rgba(0,0,0,.0975);
     box-shadow: 0 0 5px rgba(0,0,0,.0975);
 }
+
+.grey_ptag {
+    color: #999!important;
+    font-weight: 500!important;
+    margin-top: 100px !important;
+}

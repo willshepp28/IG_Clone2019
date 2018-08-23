@@ -11,6 +11,7 @@ import { AuthService } from '../../auth.service';
 export class PostComponent implements OnInit {
 
   post = [];
+  postLength: number;
 
 
   constructor(
@@ -23,7 +24,7 @@ export class PostComponent implements OnInit {
 
     this.auth.getUserPost(tokenId)
       .subscribe(
-        response => { console.log(response), this.post = response},
+        response => { console.log(response), this.post = response, this.postLength = this.post.length},
         error => console.log(error)
       )
   }

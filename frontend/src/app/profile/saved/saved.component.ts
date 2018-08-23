@@ -11,6 +11,7 @@ import * as jwt_decode from "jwt-decode";
 export class SavedComponent implements OnInit {
 
   savedPost = [];
+  savedPostLength: number;
 
   constructor(
     private saveService: SavedPostService
@@ -22,7 +23,7 @@ export class SavedComponent implements OnInit {
 
     this.saveService.getUsersSavedPost(tokenId)
       .subscribe(
-        response => { console.log(response), this.savedPost = response},
+        response => { console.log(response), this.savedPost = response, this.savedPostLength = this.savedPost.length},
         error => console.log(error)
       )
   }

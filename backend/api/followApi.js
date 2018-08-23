@@ -51,8 +51,38 @@ router.route("/:id")
                 response.status(200).json(follower)
             })
             .catch(error => console.log(error));
-    });
+    })
 
+
+
+
+router.post("/acceptRequest/:id", verifyToken, (request, response) => {
+
+    knex("follower")
+    .where({
+        followerId: request.params.id,
+        followeeId: request.userId
+    })
+    .update({
+        accept_request: true
+    })
+    .then(() => response.status(200).json({message: "Accepted request"}))
+    .catch(error => console.log(error));
+});
+
+
+
+router.post("/denyRequest/:id", verifyToken, (request, response) => {
+
+    knex("follower")
+        .where({
+            followerId: request.params.id,
+            followeeId: request.userId
+        })
+        .del()
+        .then(() => response.status(200).json({ message: "Deny follower request"}))
+        .catch(error => console.log(error));
+})
 
 
 module.exports = router;

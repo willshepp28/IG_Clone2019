@@ -36,6 +36,11 @@ export class AppComponent {
   }
 
 
+  approveRequest(){}
+
+  denyRequest(){}
+
+
   getDecodedAccessToken(token: string): any {
     try{
         return jwt_decode(token);
