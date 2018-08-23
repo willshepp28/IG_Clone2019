@@ -25,20 +25,38 @@
     
   </div>
 
-  <div class="row mt-50">
+  <!-- <div class="row mt-50">
       <div class="col">
-        <p class="text-center">Posts</p>
+        <a [routerLink]="['posts']"><p class="text-center">Posts</p></a>
       </div>
-    </div>
-<!-- 
-  <div class="row">
+
+      <div class="col">
+          <a [routerLink]="['saved']"><p class="text-center">Saved</p></a>
+      </div>
+    </div> -->
+
+    <div class="row mt-50">
+        <div class="col">
+         <p class="text-center" (click)="showPosts()">Posts</p>
+        </div>
+  
+        <div class="col">
+            <p class="text-center" (click)="showSaved()">Saved</p>
+        </div>
+      </div>
+  
+
+      <router-outlet></router-outlet>
+
+
+  <!-- <div class="row">
     <div class="col">
       <div *ngFor="let post of user['photo']">
           <img src="post.photo" alt="">
       </div>
     </div>
-  </div> -->
-  <div class="row bt-grey">
+  </div>  -->
+   <!-- <div class="row bt-grey">
     <div class="col pt-5" *ngFor="let post of user.posts">
       <div *ngIf="!post">
         <p>No posts yet</p>
@@ -49,6 +67,6 @@
       </div>
         
       </div>
-  </div>
+  </div> -->
 
 </div>

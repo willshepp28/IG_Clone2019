@@ -56,6 +56,11 @@ export class AuthService {
     return this.http.get<any>(this._postUrl);
   }
   
+
+ getUserPost(id){
+  return this.http.get<any>(`http://localhost:3000/api/v1/posts/${id}`)
+ }
+  
  
 }
 

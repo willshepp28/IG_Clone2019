@@ -421,10 +421,14 @@ router.get("/users", verifyToken, (request, response) => {
                     for(let i = 0; i < user.length; i++){
 
                         if(limit <= 3) {
-                            if(user[i].id !== follower[i].followeeId) {
-                                newUsers.push(user[i])
-                                limit++;
-                                console.log(limit);
+                            for(let x = 0; x < follower.length; x++) {
+                            
+                                if(user[i].id !== follower[x].followeeId) {
+                                    newUsers.push(user[i])
+                                    limit++;
+                                    console.log(limit);
+                            }
+                            
     
                             }
                         }
@@ -455,6 +459,18 @@ router.get("/post", (request, response) => {
 });
 
 
+
+router.get('/posts/:id', verifyToken, (request, response) => {
+
+    var userId = parseInt(request.params.id);
+
+    knex("posts")
+        .where({
+            user_id: userId
+        })
+        .then(user => response.status(200).json(user))
+        .catch(error => console.log(error));
+})
 
 
 

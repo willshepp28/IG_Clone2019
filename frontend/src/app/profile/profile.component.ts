@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import * as jwt_decode from "jwt-decode";
 
@@ -14,7 +15,9 @@ export class ProfileComponent implements OnInit {
   postLength: number;
 
   constructor(
-    private userService : UserService
+    private userService : UserService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -32,6 +35,15 @@ export class ProfileComponent implements OnInit {
       )
   }
 
+
+  showPosts(){
+   this.router.navigate(['post'], { relativeTo: this.route})
+  }
+
+
+  showSaved(){
+    this.router.navigate(['saved'], { relativeTo: this.route})
+  }
 
 
   getDecodedAccessToken(token: string): any {

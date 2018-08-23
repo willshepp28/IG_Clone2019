@@ -85,6 +85,8 @@ router.get("/posts", verifyToken, async (request, response) => {
             return response.status(401).send("no posts")
         })
 
-})
+});
+
+
 
 module.exports = router;

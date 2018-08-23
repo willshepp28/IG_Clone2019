@@ -18,6 +18,8 @@ import { LikeService } from './like.service';
 import { CommentService } from './comment.service';
 import { FollowerService } from './follower.service';
 import { SavedPostService } from './saved-post.service';
+import { PostComponent } from './profile/post/post.component';
+import { SavedComponent } from './profile/saved/saved.component';
 
 
 
@@ -30,7 +32,9 @@ import { SavedPostService } from './saved-post.service';
     SignupComponent,
     LoginComponent,
     ProfileComponent,
-    ExploreComponent
+    ExploreComponent,
+    PostComponent,
+    SavedComponent
   ],
   imports: [
     BrowserModule,

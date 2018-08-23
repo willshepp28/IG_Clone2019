@@ -24,4 +24,9 @@ export class SavedPostService {
         observe: 'response'
       });
   }
+
+
+  getUsersSavedPost(id){
+    return this.http.get<any>(`http://localhost:3000/api/v1/savedPost/${id}`)
+  }
 }
