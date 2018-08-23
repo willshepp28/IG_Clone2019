@@ -36,7 +36,7 @@ exports.up = function(knex, Promise) {
         table.integer("followeeId").unsigned().references("id").inTable("users")
         table.boolean("accept_request").defaultTo("false");
     })
-    .createTable("savedPost", (table) => {
+    .createTable("saved", (table) => {
         table.increments();
         table.integer("userId").unsigned().references("id").inTable("users");
         table.integer("postId").unsigned().references("id").inTable("posts");
@@ -44,5 +44,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable("savedPost").dropTable("comments").dropTable("likes").dropTable("posts").dropTable("follower").dropTable("users");
+    return knex.schema.dropTable("saved").dropTable("comments").dropTable("likes").dropTable("posts").dropTable("follower").dropTable("users");
 };

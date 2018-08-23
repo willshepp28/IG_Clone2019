@@ -23,6 +23,24 @@ const router = require('express').Router(),
                 .then(() => response.status(200).json("comment added"))
                 .catch(error => console.log(error));
         });
+
+
+    router.route("/:id")
+        .get((request, response) => {
+
+            knex.select()
+                .from("post")
+                .where("id", request.body.id)
+                .then((post) => {
+                    response.status(200).json(post)
+                })
+                .catch(error => console.log(error));
+            
+        })
+        .post((request, response) => {
+
+        })
+        
         
 
 

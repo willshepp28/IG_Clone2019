@@ -12,14 +12,33 @@ const router = require("express").Router(),
 
 */
 
+   // .createTable("savedPost", (table) => {
+    //     table.increments();
+    //     table.integer("userId").unsigned().references("id").inTable("users");
+    //     table.integer("postId").unsigned().references("id").inTable("posts");
+    // })
+
 router.route("/")
     .get((request, response) => {
        knex.select()
-        .from("savedPost")
+        .from("saved")
         .then(savedPost => {
             response.status(200).json(savedPost);
         })
         .catch(error => console.log(error))
+    })
+    .post(verifyToken,(request, response) => {
+
+        console.log(request.body.id);
+        
+        knex("saved")
+            .insert({
+                userId: request.userId,
+                postId: request.body.id
+            })
+            .then(() => response.status(200).json({ message: "Successfully saved post"}))
+            .catch(error => console.log(error));
+            
     })
 
 

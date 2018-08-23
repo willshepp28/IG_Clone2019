@@ -8,6 +8,7 @@ import { CommentService } from '../comment.service';
 import { FollowerService } from '../follower.service';
 
 import * as jwt_decode from "jwt-decode";
+import { SavedPostService } from '../saved-post.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ import * as jwt_decode from "jwt-decode";
 export class HomeComponent implements OnInit {
 
   posts = [];
+  postLength: number;
   comments = [];
   followers = [];
   userComment;
@@ -39,6 +41,7 @@ export class HomeComponent implements OnInit {
     private likeService: LikeService,
     private commentService: CommentService,
     private followerService: FollowerService,
+    private savePostService: SavedPostService,
     private router: Router,
     private http: HttpClient
   ) { }
@@ -49,7 +52,9 @@ export class HomeComponent implements OnInit {
 
     this.authService.getPosts()
       .subscribe(
-        response => { console.log(response), this.posts = response },
+        response => { console.log(response),
+          this.posts = response,
+          this.postLength = this.posts.length },
         error => {
           if (error instanceof HttpErrorResponse) {
 
@@ -73,10 +78,11 @@ export class HomeComponent implements OnInit {
       .subscribe(
         response => {
           
-          // Update post with new like
           this.authService.getPosts()
           .subscribe(
-            response => { console.log(response), this.posts = response },
+            response => { console.log(response),
+              this.posts = response,
+              this.postLength = this.posts.length },
             error => {
               if (error instanceof HttpErrorResponse) {
     
@@ -86,11 +92,31 @@ export class HomeComponent implements OnInit {
               }
             }
           )
+    
 
         },
       error => { console.log("Not going through"), console.log(error)}
       )
 
+  }
+
+
+  save(id) {
+
+    console.log(id);
+    
+    this.savePostService.savePost({id: id})
+      .subscribe(
+        response => {
+          
+          // Update post with new save
+          this.authService.getPosts()
+            .subscribe(
+              response => { console.log(response), this.posts = response},
+              error => console.log(error)
+            )
+        }
+      )
   }
 
 // comment = {};
@@ -104,9 +130,6 @@ export class HomeComponent implements OnInit {
 
 
 
-  save() {
-    this.postSaved = true;
-  }
 
   unSave() {
     this.postSaved = false;
@@ -121,6 +144,8 @@ export class HomeComponent implements OnInit {
         return null;
     }
   }
+
+
 
 
 }

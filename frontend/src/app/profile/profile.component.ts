@@ -11,6 +11,7 @@ import * as jwt_decode from "jwt-decode";
 export class ProfileComponent implements OnInit {
 
   user = [];
+  postLength: number;
 
   constructor(
     private userService : UserService
@@ -24,7 +25,9 @@ export class ProfileComponent implements OnInit {
     // console.log(localStorage.getItem('token'));
     this.userService.getUser(tokenId)
       .subscribe(
-        response => { console.log(response) , this.user = response},
+        response => { console.log(response) ,
+           this.user = response
+          },
         error => console.log(error)
       )
   }

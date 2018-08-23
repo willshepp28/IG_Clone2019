@@ -40,7 +40,14 @@
   </div> -->
   <div class="row bt-grey">
     <div class="col pt-5" *ngFor="let post of user.posts">
-        <img src="{{post.photo}}" alt="" style="height: 200px">
+      <div *ngIf="!post">
+        <p>No posts yet</p>
+      </div>
+
+      <div *ngIf="post">
+          <img src="{{post.photo}}" alt="" style="height: 200px">
+      </div>
+        
       </div>
   </div>
 

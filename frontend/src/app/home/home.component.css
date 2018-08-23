@@ -28,3 +28,9 @@ button.ig_sprites {
     height: 78px;
     width: 78px;
 }
+
+.grey_ptag {
+    color: #999!important;
+    font-weight: 500!important;
+    margin-top: 100px !important;
+}
