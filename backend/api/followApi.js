@@ -56,31 +56,35 @@ router.route("/:id")
 
 
 
-router.post("/acceptRequest/:id", verifyToken, (request, response) => {
+router.post("/acceptRequest", verifyToken, (request, response) => {
+
+    console.log(request.body.id);
 
     knex("follower")
     .where({
-        followerId: request.params.id,
+        followerId: request.body.id,
         followeeId: request.userId
     })
     .update({
         accept_request: true
     })
-    .then(() => response.status(200).json({message: "Accepted request"}))
+    .then(() => {response.status(200).json({message: "Accepted request"}), console.log("BURRRR")})
     .catch(error => console.log(error));
 });
 
 
 
-router.post("/denyRequest/:id", verifyToken, (request, response) => {
+router.post("/denyRequest", verifyToken, (request, response) => {
+
+    console.log(request.body.id)
 
     knex("follower")
         .where({
-            followerId: request.params.id,
+            followerId: request.body.id,
             followeeId: request.userId
         })
         .del()
-        .then(() => response.status(200).json({ message: "Deny follower request"}))
+        .then(() => {response.status(200).json({ message: "Deny follower request"}), console.log("You denied his request tisk tisk")})
         .catch(error => console.log(error));
 })
 
