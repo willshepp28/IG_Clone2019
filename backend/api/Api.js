@@ -105,9 +105,9 @@ router.post("/signup", (request, response) => {
 
 router.get("/posts", verifyToken, async (request, response) => {
 
-    console.log("************************")
-    console.log(request.userId);
-    console.log("************************")
+    // console.log("************************")
+    // console.log(request.userId);
+    // console.log("************************")
 
     await knex.select("posts.id", "users.id AS userId", "username", "photo", "caption", "profilePic")
         .from("posts")
@@ -121,8 +121,37 @@ router.get("/posts", verifyToken, async (request, response) => {
             post.forEach((element, index, array) => {
                 element.totalLikes = 0;
                 element.comments = [];
-                //   console.log(element);
+                element.isSaved = false;
+               
+
             })
+
+
+
+            var savedPost = knex("saved")
+            .where({
+                userId: request.userId,
+            })
+            .then(savedPost => {
+
+
+
+                    
+
+                        for(let i = 0; i < savedPost.length; i++){
+                            for(let x = 0; x < post.length; x++ ) {
+
+                                if(savedPost[i].postId === post[x].id) {
+                                    console.log("Yup")
+                                    post[x].isSaved = true;
+                                }
+                            }
+                        }
+                    
+            })
+            .catch(error => console.log(error))
+
+
 
 
 
@@ -130,7 +159,7 @@ router.get("/posts", verifyToken, async (request, response) => {
             var allComments = knex.select()
                 .from("comments")
                 .then(comment => {
-                    console.log(comment);
+                    // console.log(comment);
 
                     for(let i = 0; i < post.length; i++) {
 

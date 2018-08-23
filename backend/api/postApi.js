@@ -24,12 +24,13 @@ router.get("/posts", verifyToken, async (request, response) => {
 
             // We use this to add the totalLikes property to each post
             // We also use this to add an array of comments on each
-            post.forEach((element, index, array) => {
+             post.forEach((element, index, array) => {
                 element.totalLikes = 0;
                 element.comments = [];
+              
+                
                 //   console.log(element);
-            })
-
+            });
 
 
             // get all likes, match it to post, the push in that posts comments array

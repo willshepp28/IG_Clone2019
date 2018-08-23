@@ -30,14 +30,50 @@ router.route("/")
     .post(verifyToken,(request, response) => {
 
         console.log(request.body.id);
+
+      knex("saved")
+        .where({
+            userId: request.userId,
+            postId: request.body.id
+        })
+        .then((savedPost) => {
+
+            if(savedPost.length === 0) {
+
+                // Save if user has not already saved post
+                console.log("Saved")
+                knex("saved")
+                .insert({
+                    userId: request.userId,
+                    postId: request.body.id
+                })
+                .then(() => response.status(200).json({ message: "Successfully saved post"}))
+                .catch(error => console.log(error));
+            } else {
+
+                console.log("Unsaved")
+                // delete if post is already saved
+                knex("saved")
+                    .where({
+                        userId: request.userId,
+                        postId: request.body.id
+                    })
+                    .del()
+                    .then(() => response.status(200).json({ message: "Successfully deleted post"}))
+                    .catch(error => console.log(error))
+            }
+
+        })
+        .catch(error => console.log(error))
+            
         
-        knex("saved")
-            .insert({
-                userId: request.userId,
-                postId: request.body.id
-            })
-            .then(() => response.status(200).json({ message: "Successfully saved post"}))
-            .catch(error => console.log(error));
+        // knex("saved")
+        //     .insert({
+        //         userId: request.userId,
+        //         postId: request.body.id
+        //     })
+        //     .then(() => response.status(200).json({ message: "Successfully saved post"}))
+        //     .catch(error => console.log(error));
             
     })
 

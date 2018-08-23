@@ -22,8 +22,8 @@
               <button *ngIf="post.totalLikes > 0" class="ig_sprites hw24 borderNone outlineNone" id="heart2" (click)="LikePost(post.id)"></button>
       
               <button class="ig_sprites hw24 borderNone outlineNone" id="comment"></button>
-              <span *ngIf="!postSaved" class="ig_sprites hw24 borderNone outlineNone" id="save" (click)="save(post.id)"></span>
-              <!-- <span *ngIf="postSaved === true" class="ig_sprites hw24 borderNone outlineNone" id="saved" (click)="unSave()"></span> -->
+              <span *ngIf="!post.isSaved" class="ig_sprites hw24 borderNone outlineNone" id="save" (click)="save(post.id)"></span>
+              <span *ngIf="post.isSaved" class="ig_sprites hw24 borderNone outlineNone" id="saved" (click)="save(post.id)"></span>
         
             </div>
             <strong *ngIf="post.totalLikes == 0">No likes yet! {{ post.totalLikes}}</strong>
