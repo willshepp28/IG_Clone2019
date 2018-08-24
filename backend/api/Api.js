@@ -406,6 +406,7 @@ router.get("/users", verifyToken, (request, response) => {
         .from("users")
         .whereNot("id", request.userId)
         .orderByRaw('RANDOM()')
+        .limit(3)
         .then(user => {
 
             var newUsers = [];
@@ -436,7 +437,7 @@ router.get("/users", verifyToken, (request, response) => {
                         
                     }
 
-                    response.status(200).json(newUsers);
+                    response.status(200).json(user);
                 })
                 .catch(error => console.log(error));
 
