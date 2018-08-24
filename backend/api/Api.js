@@ -142,7 +142,6 @@ router.get("/posts", verifyToken, async (request, response) => {
                             for(let x = 0; x < post.length; x++ ) {
 
                                 if(savedPost[i].postId === post[x].id) {
-                                    console.log("Yup")
                                     post[x].isSaved = true;
                                 }
                             }
@@ -156,10 +155,12 @@ router.get("/posts", verifyToken, async (request, response) => {
 
 
             // get all likes, match it to post, the push in that posts comments array
-            var allComments = knex.select()
+            var allComments = knex.select("comments.id", "comment", "users.id As users_id", "username", "postId", )
                 .from("comments")
+                .innerJoin("users", "comments.userId", "users.id")
                 .then(comment => {
-                    // console.log(comment);
+
+                    console.log(comment);
 
                     for(let i = 0; i < post.length; i++) {
 
@@ -169,6 +170,14 @@ router.get("/posts", verifyToken, async (request, response) => {
                             // console.log(post[i])
                             
                             if(comment[x].postId === post[i].id) {
+                                // console.log(`Post username: ${post[i].username}`)
+
+                                // adds username from posts to 
+                                // comment[x].username = post[i].username;
+                                console.log("____________");
+                                console.log(comment[x]);
+                                console.log("____________");
+                                // pushs comment array to the users array
                                 post[i].comments.push(comment[x]);
                             }
                         }
