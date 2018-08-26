@@ -50,7 +50,7 @@
             <strong>< Follow Requests</strong>
           </div>
           <ul class="list-group list-group-flush" *ngFor="let follower of followRequests">
-            <li class="list-group-item">
+            <li class="list-group-item" *ngIf="followRequestLength">
               <div class="row">
                 <div class="col"><img src="{{follower.profilePic}}" class="rounded-circle" alt="" style="height:35px"></div>
                 <div class="col"><strong>{{follower.username}}</strong></div>
@@ -59,6 +59,12 @@
               </div>
             </li>
           </ul>
+
+          <li class="list-group-item" *ngIf="!followRequestLength">
+              <div class="row">
+                <div class="col"><p class="text-center">You have no follow requests at the moment!</p></div>
+              </div>
+            </li>
         </div>
     </div>
   </div>

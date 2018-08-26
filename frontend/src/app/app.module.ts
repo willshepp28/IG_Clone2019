@@ -11,6 +11,9 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ExploreComponent } from './explore/explore.component';
+import { PostComponent as OnePostComponent } from "./post/post.component";
+
+
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
@@ -20,6 +23,7 @@ import { FollowerService } from './follower.service';
 import { SavedPostService } from './saved-post.service';
 import { PostComponent } from './profile/post/post.component';
 import { SavedComponent } from './profile/saved/saved.component';
+import { PostService } from './post.service';
 
 
 
@@ -34,7 +38,8 @@ import { SavedComponent } from './profile/saved/saved.component';
     ProfileComponent,
     ExploreComponent,
     PostComponent,
-    SavedComponent
+    SavedComponent,
+    OnePostComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,7 @@ import { SavedComponent } from './profile/saved/saved.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, AuthGuard, LikeService, CommentService, FollowerService, SavedPostService,
+  providers: [AuthService, AuthGuard, LikeService, CommentService, FollowerService, SavedPostService, PostService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

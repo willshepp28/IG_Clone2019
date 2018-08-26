@@ -9,12 +9,14 @@ import { ProfileComponent } from "./profile/profile.component";
 
 import { AuthGuard } from "./auth.guard";
 import { PostComponent } from "./profile/post/post.component";
+import { PostComponent as OnePostComponent } from "./post/post.component";
 import { SavedComponent } from "./profile/saved/saved.component";
 
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
     { path: "home", component: HomeComponent, canActivate: [AuthGuard]},
     { path: "signup", component: SignupComponent},
+    { path: "post/:id", component: OnePostComponent },
     { path: "profile", component: ProfileComponent, canActivate: [AuthGuard],
     children: [
         {path: '', redirectTo: 'post', pathMatch: "full"},

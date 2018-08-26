@@ -7,3 +7,7 @@ Profile Styling
 .bt-grey {
     border-top: 1px solid #efefef;
 }
+
+p {
+    cursor: pointer;
+}

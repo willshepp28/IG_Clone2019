@@ -34,3 +34,12 @@ button.ig_sprites {
     font-weight: 500!important;
     margin-top: 100px !important;
 }
+
+.commentForm {
+    resize: none;
+    
+}
+
+.noBorder {
+    border: 0 !important; 
+}

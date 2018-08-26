@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { FollowerService } from '../follower.service';
 
 import * as jwt_decode from "jwt-decode";
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-explore',
@@ -16,7 +17,9 @@ export class ExploreComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private followService: FollowerService
+    private followService: FollowerService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -45,6 +48,16 @@ export class ExploreComponent implements OnInit {
         response => { console.log(response)},
         error => console.log(error)
       )
+  }
+
+
+  logData(id) {
+    console.log(`POST ID: ${id}`);
+  }
+
+
+  selectPost(postId) {
+    this.router.navigate(['/post', postId])
   }
 
 

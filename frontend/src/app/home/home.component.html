@@ -6,8 +6,8 @@
           <div class="card-header">
               <div class="container">
                 <div class="row">
-                  <a href=""><img src="" class="rounded-circle smallPic" alt=""></a>
-                  <a href=""><strong>{{ post.username }}</strong></a>
+                  <a routerLink="/profile/{{post.user_id}}"><img src="{{post.profilePic}}" class="rounded-circle smallPic" alt=""></a>
+                  <a routerLink="/profile/{{post.user_id}}"><strong>{{ post.username }}</strong></a>
                 </div>
               </div>
             </div>
@@ -34,14 +34,19 @@
       
             <p class="card-text text-muted">Load more comments</p>
       
-            <p *ngFor="let say of post['comments'] "class="card-text"><strong> </strong> {{ say.comment}}</p>
+            <p *ngFor="let say of post['comments'] "class="card-text"><strong>{{say.username}} - </strong> {{ say.comment}}</p>
       
             <hr>
             
-            <form class="form">
+            <!-- <form class="form">
               <input [(ngModel)]="userComment" name="comment" type="text" class="form-control rounded-0"  required>
               <button (click)="addComment(post.id)"  class="btn btn-primary">Submit</button>
-            </form>
+            </form> -->
+            <section class="sH9wk  _JgwE ">
+              <div class="RxpZH">
+              <form class="X7cDz" (keydown)="submit($event, post.id)"><textarea aria-label="Add a comment…" placeholder="Add a comment…"  class="Ypffh noBorder commentForm" autocomplete="off" autocorrect="off"></textarea>
+              </form></div>
+            </section>
     
             <p class="card-text"><small class="text-muted">1 day ago</small></p>
           </div>

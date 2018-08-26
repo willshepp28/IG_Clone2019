@@ -13,7 +13,8 @@ import * as jwt_decode from "jwt-decode";
 export class AppComponent {
   title = 'app';
   
-  followRequests = <any>[];
+  followRequests = [];
+  followRequestLength: number;
 
   constructor(
     private router: Router,
@@ -30,15 +31,55 @@ export class AppComponent {
 
     this._followService.getFollowers(tokenId)
       .subscribe(
-        response => { console.log(response), this.followRequests = response},
+        response => { console.log(response), this.followRequests = response, this.followRequestLength = this.followRequests.length},
         error => console.log(error)
       )
   }
 
 
-  approveRequest(){}
+  approveRequest(followerId){
+    
+    this._followService.acceptFollowRequest({id: followerId})
+      .subscribe(
+        response => { 
 
-  denyRequest(){}
+          var token = this.getDecodedAccessToken(localStorage.getItem('token'));
+          var tokenId = token.user[0].id;
+
+          
+         this._followService.getFollowers(tokenId)
+          .subscribe(
+            response => { console.log(response), this.followRequests = response, this.followRequestLength = this.followRequests.length},
+            error => console.log(error)
+          )
+        },
+        error => console.log(error)
+      )
+  }
+
+  
+
+  denyRequest(followerId){
+
+    
+    this._followService.denyFollowRequest({id: followerId})
+      .subscribe(
+        response => { 
+
+          var token = this.getDecodedAccessToken(localStorage.getItem('token'));
+          var tokenId = token.user[0].id;
+
+          
+         this._followService.getFollowers(tokenId)
+          .subscribe(
+            response => { console.log(response), this.followRequests = response, this.followRequestLength = this.followRequests.length},
+            error => console.log(error)
+          )
+        },
+        error => console.log(error)
+      )
+  }
+  
 
 
   getDecodedAccessToken(token: string): any {

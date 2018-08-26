@@ -318,6 +318,8 @@ router.post("/comments", verifyToken, (request, response) => {
 
 router.get("/profile/:id", verifyToken, ( request ,response) => {
 
+    console.log(request.params.id)
+
     var userId = parseInt(request.params.id);
     console.log( request.params.id);
     console.log( userId)
@@ -344,6 +346,8 @@ router.get("/profile/:id", verifyToken, ( request ,response) => {
         .catch( error => console.log(error));
 
 })
+
+
 
 
 router.route("/addPost", verifyToken, (request, response) => {
@@ -476,7 +480,7 @@ router.get('/posts/:id', verifyToken, (request, response) => {
 
     knex("posts")
         .where({
-            user_id: userId
+            id: userId
         })
         .then(user => response.status(200).json(user))
         .catch(error => console.log(error));

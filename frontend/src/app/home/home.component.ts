@@ -23,11 +23,12 @@ export class HomeComponent implements OnInit {
   comments = [];
   followers = [];
   userComment;
+  commentPlaceholder: string = "Add a Comment ...";
   // comments = {
   //   comment: "",
   //   postId: 0
   // };
-  
+
 
   postSaved: boolean = false;
 
@@ -48,13 +49,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-  
+
 
     this.authService.getPosts()
       .subscribe(
-        response => { console.log(response),
+        response => {
+          console.log(response),
           this.posts = response,
-          this.postLength = this.posts.length },
+          this.postLength = this.posts.length
+        },
         error => {
           if (error instanceof HttpErrorResponse) {
 
@@ -65,10 +68,42 @@ export class HomeComponent implements OnInit {
         }
       )
 
-      
+
 
   }
 
+
+  submit(event, postId) {
+    // https://stackoverflow.com/questions/37577919/angular2-submit-form-by-pressing-enter-without-submit-button
+
+
+    if (event.keyCode == 13) {
+      console.log(event.target.value);
+      event.preventDefault();
+      console.log("Yup you pressed enter");
+      console.log(`Event:  ${event}`)
+      console.log(`PostID: ${postId}`)
+
+      this.commentService.addComment({ id: postId, comment: event.target.value })
+        .subscribe(
+          response => {
+
+            this.authService.getPosts()
+              .subscribe(
+                response => {
+                  this.posts = response,
+                    this.postLength = this.posts.length
+                  // this.commentPlaceholder = "Add a Comment...."
+                  event.target.value = " ";
+                },
+                error => console.log(error)
+              )
+          }
+        )
+
+
+    }
+  }
 
 
 
@@ -77,25 +112,27 @@ export class HomeComponent implements OnInit {
     this.likeService.addLike({ id: id })
       .subscribe(
         response => {
-          
+
           this.authService.getPosts()
-          .subscribe(
-            response => { console.log(response),
-              this.posts = response,
-              this.postLength = this.posts.length },
-            error => {
-              if (error instanceof HttpErrorResponse) {
-    
-                if (error.status === 401) {
-                  this.router.navigate(["/login"]);
+            .subscribe(
+              response => {
+                console.log(response),
+                this.posts = response,
+                this.postLength = this.posts.length
+              },
+              error => {
+                if (error instanceof HttpErrorResponse) {
+
+                  if (error.status === 401) {
+                    this.router.navigate(["/login"]);
+                  }
                 }
               }
-            }
-          )
-    
+            )
+
 
         },
-      error => { console.log("Not going through"), console.log(error)}
+        error => { console.log("Not going through"), console.log(error) }
       )
 
   }
@@ -104,44 +141,37 @@ export class HomeComponent implements OnInit {
   save(id) {
 
     console.log(id);
-    
-    this.savePostService.savePost({id: id})
+
+    this.savePostService.savePost({ id: id })
       .subscribe(
         response => {
-          
+
           // Update post with new save
           this.authService.getPosts()
             .subscribe(
-              response => { console.log(response), this.posts = response},
+              response => { console.log(response), this.posts = response },
               error => console.log(error)
             )
         }
       )
   }
 
-// comment = {};
-  addComment(postId){
+  // comment = {};
+  addComment(postId) {
 
-    this.comments.push({ postId: postId, comment: this.userComment});
+    this.comments.push({ postId: postId, comment: this.userComment });
     console.log(this.comments);
 
   }
 
 
 
-
-
-  unSave() {
-    this.postSaved = false;
-  }
-
-
   getDecodedAccessToken(token: string): any {
-    try{
-        return jwt_decode(token);
+    try {
+      return jwt_decode(token);
     }
-    catch(Error){
-        return null;
+    catch (Error) {
+      return null;
     }
   }
 

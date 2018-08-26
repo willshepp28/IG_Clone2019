@@ -24,6 +24,8 @@ export class ProfileComponent implements OnInit {
     var token = this.getDecodedAccessToken(localStorage.getItem('token'));
     var tokenId = token.user[0].id;
 
+   
+
     console.log(token.user[0].id);
     // console.log(localStorage.getItem('token'));
     this.userService.getUser(tokenId)

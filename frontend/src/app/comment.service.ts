@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 export class CommentService {
 
 
-  private _commentUrl = "http://localhost:3000/api/v1/comment";
+  private _commentUrl = "http://localhost:3000/api/v1/comments";
 
   constructor(
     private http: HttpClient,

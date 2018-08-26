@@ -25,11 +25,11 @@ export class FollowerService {
 
 
   acceptFollowRequest(id){
-    return this.http.post<any>(`http://localhost:3000/api/v1/follower/acceptRequest/${id}`, id)
+    return this.http.post<any>(`http://localhost:3000/api/v1/follower/acceptRequest`, id)
   }
 
 
   denyFollowRequest(id){
-    return this.http.post<any>(`http://localhost:3000/api/v1/follower/denyRequest/${id}`, id)
+    return this.http.post<any>(`http://localhost:3000/api/v1/follower/denyRequest`, id)
   }
 }
