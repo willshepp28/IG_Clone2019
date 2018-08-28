@@ -15,6 +15,7 @@
     commentsApi = require("./api/commentsApi"),
     followerApi = require("./api/followApi"),
     savedApi = require("./api/saveApi"),
+    totalApi = require("./api/totalApi"),
     port = process.env.PORT || 3000;
 
 application = express();
@@ -59,6 +60,8 @@ application.use(cors())
 | Api
 |--------------------------------------------------------------------------
 */
+
+application.use("/api/v1/total", totalApi);
 application.use("/api/v1/savedPost", savedApi)
 application.use("/api/v1/follower", followerApi);
 application.use("/api/v1/comments", commentsApi);

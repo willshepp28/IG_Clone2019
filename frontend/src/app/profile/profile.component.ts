@@ -3,6 +3,7 @@ import { UserService } from '../user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import * as jwt_decode from "jwt-decode";
+import { TotalService } from '../total.service';
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +15,19 @@ export class ProfileComponent implements OnInit {
   user = [];
   postLength: number;
 
+  userInfo = {
+    postAmount: 0,
+    followingAmount: 0,
+    followerAmount: 0
+
+  };
+
+  
+  
+
   constructor(
     private userService : UserService,
+    private totalService: TotalService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
@@ -33,6 +45,45 @@ export class ProfileComponent implements OnInit {
         response => { console.log(response) ,
            this.user = response
           },
+        error => console.log(error)
+      )
+
+
+
+  // userInfo = {
+  //   postAmount: 0,
+  //   followingAmount: 0,
+  //   followerAmount: 0
+
+  // };
+
+
+    this.totalService.getNumberOfPosts()
+      .subscribe(
+        response => { this.userInfo.postAmount = parseInt(response)},
+        error => console.log(error)
+      )
+
+
+    this.totalService.getTotalFollowing()
+      .subscribe(
+        response => { this.userInfo.followingAmount = parseInt(response)},
+        error => console.log(error)
+      )
+
+
+    this.totalService.getUserWhereFollower()
+      .subscribe(
+        response => { this.userInfo.followerAmount = parseInt(response), console.log(this.userInfo)},
+        error => console.log(error)
+      )
+
+  }
+
+  clickHere() {
+    this.totalService.getNumberOfPosts()
+      .subscribe(
+        response => { console.log(response), this.userInfo.postAmount = parseInt(response), console.log(this.userInfo)},
         error => console.log(error)
       )
   }
