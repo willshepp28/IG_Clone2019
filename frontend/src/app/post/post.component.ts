@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { CommentService } from '../comment.service';
 
 @Component({
   selector: 'app-post',
@@ -10,10 +11,12 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class PostComponent implements OnInit {
 
   post = <any>[];
+  comments = <any>[];
   id: number;
 
   constructor(
     private postService: PostService,
+    private commentService: CommentService,
     private route: ActivatedRoute
   ) { }
 
@@ -35,6 +38,21 @@ export class PostComponent implements OnInit {
           
         }
       )
+
+
+      this.route.paramMap
+        .subscribe(
+          (params: ParamMap) => {
+            
+            let theid = parseInt(params.get('id'));
+            
+            this.commentService.getAllPostsOnAComment(theid)
+              .subscribe(
+                response => {console.log(response), this.comments = response},
+                error => console.log(error)
+              )
+          }
+        )
     
     console.log(`The ID: ${this.id}`);
   }

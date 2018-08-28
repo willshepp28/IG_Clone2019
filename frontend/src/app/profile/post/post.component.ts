@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import * as jwt_decode from "jwt-decode";
 import { AuthService } from '../../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -15,7 +16,8 @@ export class PostComponent implements OnInit {
 
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -27,6 +29,11 @@ export class PostComponent implements OnInit {
         response => { console.log(response), this.post = response, this.postLength = this.post.length},
         error => console.log(error)
       )
+  }
+
+
+  selectPost(postId) {
+    this.router.navigate(['/post', postId])
   }
 
 

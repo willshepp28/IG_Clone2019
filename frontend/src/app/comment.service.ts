@@ -23,4 +23,9 @@ export class CommentService {
     console.log(comment);
     return this.http.post<any>(this._commentUrl, comment)
   }
+
+
+  getAllPostsOnAComment(postId){
+    return this.http.get<any>(`${this._commentUrl}/${postId}`)
+  }
 }

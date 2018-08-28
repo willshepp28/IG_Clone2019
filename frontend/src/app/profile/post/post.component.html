@@ -6,7 +6,7 @@
 
         <div *ngIf="post">
             <a routerLink=""></a>
-            <img src="{{post.photo}}" alt="" style="height: 200px">
+            <img src="{{post.photo}}" alt="" style="height: 200px" (click)="selectPost(post.id)">
         </div>
 
     </div>

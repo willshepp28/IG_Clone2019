@@ -478,12 +478,21 @@ router.get('/posts/:id', verifyToken, (request, response) => {
 
     var userId = parseInt(request.params.id);
 
-    knex("posts")
-        .where({
-            id: userId
+    knex.select("posts.id", "users.id AS mainUserId", "photo", "username", "caption", "profilePic")
+        .from("posts")
+        .where('posts.id', userId)
+        .innerJoin("users", "posts.user_id", "users.id")
+        .then(user => {
+            response.status(200).json(user)
         })
-        .then(user => response.status(200).json(user))
         .catch(error => console.log(error));
+
+    // knex("posts")
+    //     .where({
+    //         id: userId
+    //     })
+    //     .then(user => response.status(200).json(user))
+    //     .catch(error => console.log(error));
 })
 
 

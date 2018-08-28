@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SavedPostService } from '../../saved-post.service';
 
 import * as jwt_decode from "jwt-decode";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-saved',
@@ -14,7 +15,8 @@ export class SavedComponent implements OnInit {
   savedPostLength: number;
 
   constructor(
-    private saveService: SavedPostService
+    private saveService: SavedPostService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -26,6 +28,10 @@ export class SavedComponent implements OnInit {
         response => { console.log(response), this.savedPost = response, this.savedPostLength = this.savedPost.length},
         error => console.log(error)
       )
+  }
+
+  selectPost(postId) {
+    this.router.navigate(['/post', postId])
   }
 
   getDecodedAccessToken(token: string): any {

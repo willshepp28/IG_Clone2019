@@ -5,7 +5,7 @@
         </div>
 
         <div *ngIf="post">
-            <img src="{{post.photo}}" alt="" style="height: 200px">
+            <img src="{{post.photo}}" alt="" style="height: 200px" (click)="selectPost(post.id)">
         </div>
 
     </div>
