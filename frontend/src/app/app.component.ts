@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
-import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { FollowerService } from './follower.service';
-
 import * as jwt_decode from "jwt-decode";
+
+
+import { AuthService } from './core/authentication/auth.service';
+import { FollowerService } from './core/services/follower/follower.service';
+
+
+
+
+
 
 @Component({
   selector: 'app-root',

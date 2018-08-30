@@ -7,10 +7,17 @@ import { SignupComponent } from "./signup/signup.component";
 import { ExploreComponent } from "./explore/explore.component";
 import { ProfileComponent } from "./profile/profile.component";
 
-import { AuthGuard } from "./auth.guard";
+import { AuthGuard } from "./core/guards/auth-guard/auth.guard";
 import { PostComponent } from "./profile/post/post.component";
 import { PostComponent as OnePostComponent } from "./post/post.component";
 import { SavedComponent } from "./profile/saved/saved.component";
+import { AddPostComponent } from "./profile/add-post/add-post.component";
+import { ChangeProfilePicComponent } from "./profile/change-profile-pic/change-profile-pic.component";
+
+
+
+
+
 
 const routes: Routes = [
     { path: "", redirectTo: "/home", pathMatch: "full" },
@@ -21,7 +28,9 @@ const routes: Routes = [
     children: [
         {path: '', redirectTo: 'post', pathMatch: "full"},
         {path: 'post', component: PostComponent},
-        { path: 'saved', component: SavedComponent}
+        { path: 'saved', component: SavedComponent},
+        { path: 'addPost', component: AddPostComponent },
+        { path: 'changeProfilePic', component: ChangeProfilePicComponent }
     ] },
     { path: "login", component: LoginComponent },
     { path: "explore", component: ExploreComponent, canActivate: [AuthGuard]}

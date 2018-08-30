@@ -14,16 +14,19 @@ import { ExploreComponent } from './explore/explore.component';
 import { PostComponent as OnePostComponent } from "./post/post.component";
 
 
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth.guard';
-import { TokenInterceptorService } from './token-interceptor.service';
-import { LikeService } from './like.service';
-import { CommentService } from './comment.service';
-import { FollowerService } from './follower.service';
-import { SavedPostService } from './saved-post.service';
+import { AuthService } from './core/authentication/auth.service';
+import { AuthGuard } from './core/guards/auth-guard/auth.guard';
+import { TokenInterceptorService } from './core/interceptors/token-interceptor/token-interceptor.service';
+import { LikeService } from './core/services/like/like.service';
+import { CommentService } from './core/services/comments/comment.service';
+import { FollowerService } from './core/services/follower/follower.service';
+import { SavedPostService } from './core/services/saved-post/saved-post.service';
 import { PostComponent } from './profile/post/post.component';
 import { SavedComponent } from './profile/saved/saved.component';
-import { PostService } from './post.service';
+import { PostService } from './core/services/post/post.service';
+import { AddPostComponent } from './profile/add-post/add-post.component';
+import { ChangeProfilePicComponent } from './profile/change-profile-pic/change-profile-pic.component';
+
 
 
 
@@ -39,7 +42,9 @@ import { PostService } from './post.service';
     ExploreComponent,
     PostComponent,
     SavedComponent,
-    OnePostComponent
+    OnePostComponent,
+    AddPostComponent,
+    ChangeProfilePicComponent
   ],
   imports: [
     BrowserModule,

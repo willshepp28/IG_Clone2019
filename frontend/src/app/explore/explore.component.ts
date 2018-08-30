@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { FollowerService } from '../follower.service';
-
-import * as jwt_decode from "jwt-decode";
 import { Router, ActivatedRoute } from '@angular/router';
+import * as jwt_decode from "jwt-decode";
+
+
+import { AuthService } from '../core/authentication/auth.service';
+import { FollowerService } from '../core/services/follower/follower.service';
+
+
+
+
+
 
 @Component({
   selector: 'app-explore',

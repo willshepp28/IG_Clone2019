@@ -1,8 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-import * as jwt_decode from "jwt-decode";
-import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
+import * as jwt_decode from "jwt-decode";
+
+
+import { AuthService } from '../../core/authentication/auth.service';
+
+
+
+
+
 
 @Component({
   selector: 'app-post',

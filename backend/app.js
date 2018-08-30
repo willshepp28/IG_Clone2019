@@ -16,6 +16,7 @@
     followerApi = require("./api/followApi"),
     savedApi = require("./api/saveApi"),
     totalApi = require("./api/totalApi"),
+    imageUploadApi = require("./api/imageUploadApi");
     port = process.env.PORT || 3000;
 
 application = express();
@@ -43,17 +44,6 @@ application.use(cors())
 
 
 
-// Express will allow requests from port 8080
-// 8080 needs access to our json data
-// application.use(cors({
-//     origin: 'http://localhost:4200',
-//     optionsSuccessStatus: 200
-//   }));
-
-
-
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +51,7 @@ application.use(cors())
 |--------------------------------------------------------------------------
 */
 
+application.use("/api/v1/imageUpload", imageUploadApi );
 application.use("/api/v1/total", totalApi);
 application.use("/api/v1/savedPost", savedApi)
 application.use("/api/v1/follower", followerApi);

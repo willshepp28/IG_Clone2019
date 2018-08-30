@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
+import { UserService } from '../core/services/user/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import * as jwt_decode from "jwt-decode";
-import { TotalService } from '../total.service';
+
+
+import { TotalService } from '../core/services/total/total.service';
+
+
+
+
+
 
 @Component({
   selector: 'app-profile',
@@ -49,15 +55,6 @@ export class ProfileComponent implements OnInit {
       )
 
 
-
-  // userInfo = {
-  //   postAmount: 0,
-  //   followingAmount: 0,
-  //   followerAmount: 0
-
-  // };
-
-
     this.totalService.getNumberOfPosts()
       .subscribe(
         response => { this.userInfo.postAmount = parseInt(response)},
@@ -80,13 +77,15 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  clickHere() {
-    this.totalService.getNumberOfPosts()
-      .subscribe(
-        response => { console.log(response), this.userInfo.postAmount = parseInt(response), console.log(this.userInfo)},
-        error => console.log(error)
-      )
-  }
+
+
+  showAddPost(){
+    this.router.navigate(['addPost'], { relativeTo: this.route});
+  };
+
+  showChangeProfilePic(){
+    this.router.navigate(['changeProfilePic'], { relativeTo: this.route});
+  };
 
 
   showPosts(){

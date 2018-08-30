@@ -19,21 +19,19 @@
                 <span class="small-font"><strong>{{userInfo.postAmount}}</strong> posts  <strong>{{userInfo.followingAmount}}</strong> followers <strong>{{userInfo.followerAmount}}</strong> following</span>
               </div>
         </div>
+
+
+        <div class="row">
+          <div class="col-6"><button class="btn btn-success" (click)="showAddPost()">Add a Post</button></div>
+          <div class="col-6"><button class="btn btn-primary" (click)="showChangeProfilePic()">Change Profile Picture</button></div>
+        </div>
+
       </div>
     </div>
 
     
   </div>
 
-  <!-- <div class="row mt-50">
-      <div class="col">
-        <a [routerLink]="['posts']"><p class="text-center">Posts</p></a>
-      </div>
-
-      <div class="col">
-          <a [routerLink]="['saved']"><p class="text-center">Saved</p></a>
-      </div>
-    </div> -->
 
     <div class="row mt-50">
         <div class="col">

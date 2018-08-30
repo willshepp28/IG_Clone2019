@@ -1,14 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { HttpErrorResponse, HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { LikeService } from '../like.service';
-import { Observable } from 'rxjs';
-import { CommentService } from '../comment.service';
-import { FollowerService } from '../follower.service';
-
 import * as jwt_decode from "jwt-decode";
-import { SavedPostService } from '../saved-post.service';
+import { Observable } from 'rxjs';
+
+
+import { AuthService } from '../core/authentication/auth.service';
+import { LikeService } from '../core/services/like/like.service';
+import { CommentService } from '../core/services//comments/comment.service';
+import { FollowerService } from '../core/services//follower/follower.service';
+import { SavedPostService } from '../core/services/saved-post/saved-post.service';
+
+
+
+
 
 
 @Component({
@@ -24,10 +29,7 @@ export class HomeComponent implements OnInit {
   followers = [];
   userComment;
   commentPlaceholder: string = "Add a Comment ...";
-  // comments = {
-  //   comment: "",
-  //   postId: 0
-  // };
+
 
 
   postSaved: boolean = false;
