@@ -28,8 +28,15 @@
 <button (click)="l()" type="button" class="btn btn-primary float-right">Register</button>
 </form> -->
 
-<h1>File Upload</h1>
+<!-- <h1>File Upload</h1>
 <img *ngIf="image" src="{{image}}" alt=""> 
 <input type="file" (change)="onFileSelected($event)">
 
-<button class="btn btn-primary" (click)="onUpload()">Upload</button>
+<button class="btn btn-primary" (click)="onUpload()">Upload</button> -->
+
+<div>
+    <div>
+      <input type="file" (change)="createFormData($event)">
+    </div>
+    <button (click)="upload()">Upload</button>
+  </div>

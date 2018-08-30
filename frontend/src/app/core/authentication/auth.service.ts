@@ -14,11 +14,7 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  private _signupUrl = "http://localhost:3000/api/v1/signup";
-  private _loginUrl = "http://localhost:3000/api/v1/login";
-  private _postsUrl = "http://localhost:3000/api/v1/posts";
-  private _postUrl = "http://localhost:3000/api/v1/post";
-  private _userUrl = "http://localhost:3000/api/v1/users";
+  private Url = "http://localhost:3000/api/v1/";
 
   constructor(
     private http: HttpClient,
@@ -26,47 +22,43 @@ export class AuthService {
   ) { }
 
   registerUser(user) {
-    return this.http.post<any>(this._signupUrl, user)
-  }
+    return this.http.post<any>(this.Url + "signup",user);
+  };
 
   loginUser(user) {
-    return this.http.post<any>(this._loginUrl, user)
-  }
+    return this.http.post<any>(this.Url + "login", user);
+  };
 
   getPosts() {
-    return this.http.get<any>(this._postsUrl)
-  }
+    return this.http.get<any>(this.Url + "posts");
+  };
 
 
   loggedIn() {
-
     // returns true or false
     // if token is in local storage it returns true. If not it returns false
-    return !!localStorage.getItem('token')
-  }
+    return !!localStorage.getItem('token');
+  };
+
 
    public getToken(): string {
-  
     return localStorage.getItem('token');
-  }
-
+  };
 
   discoverUsers(){
-    return this.http.get<any>(this._userUrl);
-  }
+    return this.http.get<any>(this.Url + "users");
+  };
 
   getPost(){
-    return this.http.get<any>(this._postUrl);
-  }
+    return this.http.get<any>(this.Url + "post");
+  };
   
 
  getUserPost(id){
-  return this.http.get<any>(`http://localhost:3000/api/v1/posts/${id}`)
+  return this.http.get<any>(`${this.Url}posts/${id}`)
  }
   
  
 }
 
 
-// Import HttpClientModule
-// Inject it in the AuthService Constructor
