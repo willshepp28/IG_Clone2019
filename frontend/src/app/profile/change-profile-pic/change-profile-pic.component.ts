@@ -15,8 +15,6 @@ import { UploadFileService } from '../../core/services/upload-file-service/uploa
 })
 export class ChangeProfilePicComponent implements OnInit {
 
-  // selectedFile: File = null;
-  // image: any;
 
   selectedFile: File = null;
   fd = new FormData();
@@ -39,6 +37,8 @@ export class ChangeProfilePicComponent implements OnInit {
   }
 
   upload() {
+    console.log(this.fd);
+    
     this.http.post(this.url + "changeProfile", this.fd)
     .subscribe( result => {
       console.log(result)
@@ -46,28 +46,9 @@ export class ChangeProfilePicComponent implements OnInit {
   }
 
 
-  // onFileSelected(event) {
-  //   this.selectedFile = <File>event.target.files[0];
-  
-  //   console.log(this.image);
-  // }
 
-  // onUpload(){
 
-  //   const fd = new FormData();
-
-  //   fd.append("image", this.selectedFile, this.selectedFile.name);
-  
-  //   console.log(`FD: ${fd}`);
-
-  //   this.http.post<any>("http://localhost:3000/api/v1/imageUpload/changeProfile", fd)
-  //     .subscribe(
-  //       response => {console.log(response), this.image = response},
-  //       error => console.log(error)
-  //     )
-
-  // }
-
+ 
   
 
 }

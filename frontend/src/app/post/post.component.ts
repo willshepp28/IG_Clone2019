@@ -21,6 +21,8 @@ export class PostComponent implements OnInit {
   comments = <any>[];
   id: number;
 
+
+
   constructor(
     private postService: PostService,
     private commentService: CommentService,
@@ -35,6 +37,7 @@ export class PostComponent implements OnInit {
       .subscribe(
         (params: ParamMap) => {
           let theid = parseInt(params.get('id'));
+          console.log(theid);
           this.id = theid;
 
           this.postService.getPost(theid)
@@ -63,5 +66,11 @@ export class PostComponent implements OnInit {
     
     console.log(`The ID: ${this.id}`);
   }
+
+
+  askMe() {
+    console.log("Please dont ask me questions");
+  };
+
 
 }

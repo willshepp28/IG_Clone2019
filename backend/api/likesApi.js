@@ -16,7 +16,7 @@ const router = require('express').Router()
             .catch(error => {
                 console.log(error);
                 return response.status(401).send("Didnt recieve likes");
-            })
+            });
     });
 
 

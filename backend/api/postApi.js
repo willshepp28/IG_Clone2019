@@ -145,7 +145,38 @@ router.get('/:id', verifyToken, (request, response) => {
         })
         .catch(error => console.log(error));
 
-})
+});
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+|   Get one post
+|--------------------------------------------------------------------------
+*/
+router.post("/addPost", verifyToken, (request, response) => {
+
+
+    // .createTable("posts", (table) => {
+    //     table.increments();
+    //     table.text("photo").notNullable().defaultTo("https://jlfarchitects.com/wp-content/uploads/2015/03/img-placeholder-300x300.jpg");
+    //     table.text("caption").notNullable();
+    //     table.integer("user_id").unsigned().references("id").inTable("users").onDelete("cascade");
+    //     table.timestamp("date_created").defaultTo(knex.fn.now());
+    // })
+
+    knex("posts")
+        .insert({
+            photo: request.body.photo,
+            caption: request.body.caption,
+            user_id: request.userId
+        })
+        .then(() => response.status(200).json({ message: "Successfully added a new post"}))
+        .catch(error => console.log(error));
+
+});
 
 
 

@@ -1,4 +1,31 @@
-Finish header
+
+/home
+
+1. When users click the username of a users post they get redirected the users page
+2. User should only see users that they are following
 
 
-Learn about change detection so we can update the view when a post is liked/unliked
+
+
+
+/explore
+
+1. Users should only discover users that they are not currently following
+2. Users should not see users that they have already requested
+
+
+
+
+
+/profile/addPost
+1. Style form
+2. Users should be able to add a new post
+
+
+
+
+
+/profile/changeProfilePic
+
+1. Style form
+2. When users add a new picture and it is successful, they should be redirected to the /profile/post route.

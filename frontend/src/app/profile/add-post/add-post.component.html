@@ -1,3 +1,13 @@
-<p>
-  add-post works!
-</p>
+<div>
+
+    <div>
+        <input type="text" [(ngModel)]="caption" name="caption" (change)="logCaption()" placeholder="Add a Caption...">
+      </div>
+      
+    <div>
+      <input type="file" (change)="createFormData($event)">
+    </div>
+
+   
+    <button (click)="upload()">Add New Post</button>
+  </div>

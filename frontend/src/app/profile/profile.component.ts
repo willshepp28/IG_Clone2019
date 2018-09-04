@@ -39,6 +39,8 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    
     var token = this.getDecodedAccessToken(localStorage.getItem('token'));
     var tokenId = token.user[0].id;
 

@@ -54,4 +54,15 @@ selectPost(postId) {
 }
 
 
+/*
+|--------------------------------------------------------------------------
+| Add a new post
+|--------------------------------------------------------------------------
+*/
+
+addNewPost(postInfo){
+  return this.http.post<any>(this._postUrl + "/addPost", postInfo)
+}
+
+
 }
