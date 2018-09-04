@@ -138,7 +138,7 @@ router.get('/:id', verifyToken, (request, response) => {
 
     knex.select("posts.id", "users.id AS mainUserId", "photo", "username", "caption", "profilePic")
         .from("posts")
-        .where('posts.id', userId)
+        .where('posts.user_id', userId)
         .innerJoin("users", "posts.user_id", "users.id")
         .then(user => {
             response.status(200).json(user)

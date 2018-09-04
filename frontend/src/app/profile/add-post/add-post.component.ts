@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PostService } from '../../core/services/post/post.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-post',
@@ -16,7 +17,9 @@ export class AddPostComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private postService: PostService
+    private postService: PostService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -31,10 +34,6 @@ export class AddPostComponent implements OnInit {
     
   }
 
-  logCaption(){
-    console.log(this.caption);
-    console.log(this.selectedFile);
-  };
 
   addText(event) {
     console.log(this.caption);
@@ -58,7 +57,10 @@ export class AddPostComponent implements OnInit {
 
       this.postService.addNewPost(userInfo)
         .subscribe(
-          response => console.log(response),
+          response => {
+            console.log(response),
+            this.router.navigate(['/profile/post'], { relativeTo: this.route});
+          },
           error => console.log(error)
         )
     });
