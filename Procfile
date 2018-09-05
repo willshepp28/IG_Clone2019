@@ -1,1 +1,1 @@
-web: cd backend && knex migrate:rollback && knex migrate:latest && knex seed:run && node app.js
+web: node www/app.js
