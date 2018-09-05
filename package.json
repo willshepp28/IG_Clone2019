@@ -4,7 +4,7 @@
   "description": "instgram clone",
   "main": "app.js",
   "scripts": {
-    "start": "node www/app.js"
+    "start": "node backend/app.js"
   },
   "engines": {
     "node": "9.11.1",
