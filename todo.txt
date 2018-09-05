@@ -3,6 +3,7 @@
 
 1. When users click the username of a users post they get redirected the users page
 2. User should only see users that they are following
+3. Only update part of the post that updated instead of the all posts 
 
 
 

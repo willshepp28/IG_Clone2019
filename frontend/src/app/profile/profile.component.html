@@ -21,9 +21,9 @@
         </div>
 
 
-        <div class="row">
-          <div class="col-6"><button class="btn btn-warning" (click)="showAddPost()">Add a Post</button></div>
-          <div class="col-6"><button class="btn grape-bg" (click)="showChangeProfilePic()">Change Profile Picture</button></div>
+        <div class="row mt-3">
+          <div class="col-6"><button class="btn btn-primary" (click)="showAddPost()">Add a Post</button></div>
+          <div class="col-6"><button class="btn btn-primary" (click)="showChangeProfilePic()">Change Profile Picture</button></div>
         </div>
 
       </div>
@@ -48,26 +48,6 @@
 
       <router-outlet></router-outlet>
 
-
-  <!-- <div class="row">
-    <div class="col">
-      <div *ngFor="let post of user['photo']">
-          <img src="post.photo" alt="">
-      </div>
-    </div>
-  </div>  -->
-   <!-- <div class="row bt-grey">
-    <div class="col pt-5" *ngFor="let post of user.posts">
-      <div *ngIf="!post">
-        <p>No posts yet</p>
-      </div>
-
-      <div *ngIf="post">
-          <img src="{{post.photo}}" alt="" style="height: 200px">
-      </div>
-        
-      </div>
-  </div> -->
 
   
 
