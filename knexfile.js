@@ -14,10 +14,10 @@ module.exports = {
         client: 'pg',
         connection: process.env.DATABASE_URL,
         migrations: {
-            directory: __dirname + 'backend/db/migrations',
+            directory: __dirname + '/backend/db/migrations',
         },
         seeds: {
-            directory: __dirname + 'backend/db/seeds',
+            directory: __dirname + '/backend/db/seeds',
         },
     }
   }
