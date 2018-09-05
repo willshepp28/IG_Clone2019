@@ -30,3 +30,5 @@
 
 1. Style form
 2. When users add a new picture and it is successful, they should be redirected to the /profile/post route.
+
+web:knex migrate:rollback && knex migrate:latest && knex seed:run && node app.js
