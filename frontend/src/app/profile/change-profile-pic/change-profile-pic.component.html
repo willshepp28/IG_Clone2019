@@ -1,7 +1,12 @@
 
-<div>
-    <div>
-      <input type="file" (change)="createFormData($event)">
-    </div>
-    <button (click)="upload()">Upload</button>
-  </div>
+
+
+
+
+  <form class="form-inline">
+ 
+    <input type="file" (change)="createFormData($event)" class="form-control mr-sm-2" id="file">
+ 
+
+    <button (click)="upload()" type="submit" class="btn btn-primary">Upload Pic</button>
+  </form>

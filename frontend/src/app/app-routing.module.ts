@@ -26,8 +26,8 @@ const routes: Routes = [
     { path: "post/:id", component: OnePostComponent },
     { path: "profile", component: ProfileComponent, canActivate: [AuthGuard],
     children: [
-        {path: '', redirectTo: 'post', pathMatch: "full"},
-        {path: 'post', component: PostComponent},
+        { path: "", redirectTo: 'post', pathMatch: "full"},
+        { path: 'post', component: PostComponent},
         { path: 'saved', component: SavedComponent},
         { path: 'addPost', component: AddPostComponent },
         { path: 'changeProfilePic', component: ChangeProfilePicComponent }

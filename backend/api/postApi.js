@@ -61,7 +61,7 @@ router.get("/", verifyToken, async (request, response) => {
 
 
             // get all likes, match it to post, the push in that posts comments array
-            var allComments = knex.select("comments.id", "comment", "users.id As users_id", "username", "postId", )
+            var allComments =  knex.select("comments.id", "comment", "users.id As users_id", "username", "postId", )
                 .from("comments")
                 .innerJoin("users", "comments.userId", "users.id")
                 .then(comment => {
