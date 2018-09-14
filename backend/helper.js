@@ -19,7 +19,7 @@ function verifyToken(request, response, next) {
         return response.status(401).send("Unauthorized request");
     }
 
-    let payload = jwt.verify(token, JWT_SECRET_KEY);
+    let payload = jwt.verify(token, process.env.JWT_SECRET);
 
     if (!payload) {
         console.log("Because you have no payload")

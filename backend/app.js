@@ -6,6 +6,7 @@
 
  const express = require("express"),
     bodyParser = require("body-parser"),
+    dotenv = require("dotenv"),
     cors = require("cors"),
     path = require("path"),
     morgan = require("morgan"),
@@ -41,6 +42,8 @@ application.use(bodyParser.urlencoded({ extended: false }));
 
 
 application.use(cors())
+
+require('dotenv').config();
 
 
 

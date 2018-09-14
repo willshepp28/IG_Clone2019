@@ -11,6 +11,8 @@ const router = require('express').Router()
 */
 router.get("/", verifyToken, async (request, response) => {
 
+    console.log(process.env.SECRET_KEY + "at rooting")
+
     // console.log("************************")
     // console.log(request.userId);
     // console.log("************************")
