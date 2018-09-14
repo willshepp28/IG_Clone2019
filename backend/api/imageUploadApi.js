@@ -1,7 +1,7 @@
 const router = require("express").Router(),
     AWS = require("aws-sdk"),
     multer = require("multer"),
-    multerS3 = require('multer-S3'),
+    multerS3 = require('multer-s3'),
     jwt = require("jsonwebtoken"),
     verifyToken = require("../helper"),
     knex = require("../db/knex"),
