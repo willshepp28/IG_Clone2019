@@ -1,1 +1,1 @@
-web: node backend/app.js && cd ../frontend && ng serve -o
+web: node www/app.js

@@ -10,6 +10,7 @@ import { LikeService } from '../core/services/like/like.service';
 import { CommentService } from '../core/services//comments/comment.service';
 import { FollowerService } from '../core/services//follower/follower.service';
 import { SavedPostService } from '../core/services/saved-post/saved-post.service';
+import { PostService } from '../core/services/post/post.service';
 
 
 
@@ -45,11 +46,14 @@ export class HomeComponent implements OnInit {
     private commentService: CommentService,
     private followerService: FollowerService,
     private savePostService: SavedPostService,
+    private postService: PostService,
     private router: Router,
     private http: HttpClient
   ) { }
 
   ngOnInit() {
+
+    
 
 
 
@@ -115,12 +119,22 @@ export class HomeComponent implements OnInit {
       .subscribe(
         response => {
 
-          this.authService.getPosts()
+
+          // What we need to do here is get the specific post the user liked, then update the posts array
+          console.log(this.posts);
+          // this.authService.getPosts()
+          //   .subscribe(
+          //     response => {
+          //       console.log(response),
+          //       this.posts = response,
+          //       this.postLength = this.posts.length
+          //     },
+
+          this.postService.getUpdatedPost(id)
             .subscribe(
+
               response => {
-                console.log(response),
-                this.posts = response,
-                this.postLength = this.posts.length
+                console.log(response)
               },
               error => {
                 if (error instanceof HttpErrorResponse) {

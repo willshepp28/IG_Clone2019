@@ -4,8 +4,8 @@ const router = require("express").Router(),
     multerS3 = require('multer-s3'),
     jwt = require("jsonwebtoken"),
     verifyToken = require("../helper"),
-    knex = require("../db/knex"),
-    { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = require("../secret/aws-config");
+    knex = require("../db/knex");
+    // { AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = require("../secret/aws-config");
 
 
 

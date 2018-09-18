@@ -1,9 +1,11 @@
 const express = require("express"),
-    jwt = require("jsonwebtoken"),
+    jwt = require("jsonwebtoken");
 
-{ JWT_SECRET_KEY } = require('./secret/config');
+// { JWT_SECRET_KEY } = require('./secret/config');
 
 function verifyToken(request, response, next) {
+
+    
 
     if (!request.headers.authorization) {
         console.log("Because you have no request.headers.auth")

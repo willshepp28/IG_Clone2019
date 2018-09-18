@@ -1,0 +1,4 @@
+
+Update ONLY the post that the user liked when user likes/unlikes post
+
+1.user clicks the like button
