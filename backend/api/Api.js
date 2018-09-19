@@ -6,7 +6,7 @@
 
 const router = require("express").Router(),
     jwt = require("jsonwebtoken"),
-    { JWT_SECRET_KEY } = require('../secret/config'),
+    // { JWT_SECRET_KEY } = require('../secret/config'),
     verifyToken = require("../helper"),
     crypto = require("crypto"),
     knex = require("../db/knex.js");
