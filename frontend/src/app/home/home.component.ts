@@ -53,16 +53,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    
+
 
 
 
     this.authService.getPosts()
       .subscribe(
         response => {
-          console.log(response),
-          this.posts = response,
-          this.postLength = this.posts.length
+          // console.log(response),
+            this.posts = response,
+            this.postLength = this.posts.length
         },
         error => {
           if (error instanceof HttpErrorResponse) {
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
 
 
           // What we need to do here is get the specific post the user liked, then update the posts array
-          console.log(this.posts);
+          // console.log(this.posts);
           // this.authService.getPosts()
           //   .subscribe(
           //     response => {
@@ -134,7 +134,33 @@ export class HomeComponent implements OnInit {
             .subscribe(
 
               response => {
+                // console.log("CHECKING POST")
+                // console.log(this.posts);
+                // console.log("CHECKING POST")
+                // find the postId
+                // for(let i = 0; i < this.posts.length; i++) {
+
+                //   if (response[0].id === this.posts[i].id) {
+                //     this.posts[i] = response[0].id;
+
+                //   }
+                // }
+                debugger;
                 console.log(response)
+
+                for(let i = 0; i < this.posts.length; i++) {
+
+                  if(response[0].id === this.posts[i].id) {
+                    console.log(this.posts[i])
+                    console.log(response[0]);
+                    this.posts[i] = response[0]
+                  }
+                }
+                console.log(response[0].id);
+                console.log("CHECKING POST AFTER THE POST WAS UPDATED")
+                console.log(this.posts)
+                console.log("CHECKING THE POST AFTER THE POST WAS UPDATED")
+                
               },
               error => {
                 if (error instanceof HttpErrorResponse) {
